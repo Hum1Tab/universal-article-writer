@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.12"]
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Show Python version
+        run: python --version
+
+      - name: Compile scripts
+        run: python -m py_compile scripts/audit_article.py scripts/argument_lint.py scripts/verify_sources.py scripts/build_universal.py scripts/check_repo.py
+
+      - name: Repository checks
+        run: python scripts/check_repo.py
+
+      - name: Inference audit smoke test
+        run: python scripts/argument_lint.py --article evals/fixtures/logic-bad-article.md --claims evals/fixtures/logic-bad-claims.csv --sources evals/fixtures/logic-bad-sources.csv --fail-on major --format json > /dev/null
+
+      - name: Source audit smoke test
+        run: python scripts/verify_sources.py --sources evals/fixtures/good-sources.csv --article evals/fixtures/good-article.md --fail-on major --format json > /dev/null

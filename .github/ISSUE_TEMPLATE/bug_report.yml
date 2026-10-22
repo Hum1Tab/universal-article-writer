@@ -1,0 +1,56 @@
+name: Bug report
+description: Report a problem with the protocol, an adapter, the audit script, or the docs.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. Please remove private or sensitive material before posting.
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: "2.0.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Core prompt / SKILL.md
+        - Adapter (ChatGPT, Claude, Gemini, coding agent, other)
+        - Audit script
+        - Evals or fixtures
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Include the smallest reproducible example you can.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: AI host and model, OS, Python version, and anything else relevant.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues.
+          required: true
+        - label: I removed secrets and private data.
+          required: true

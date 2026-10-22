@@ -1,0 +1,5 @@
+id,type,title,authors,year,venue,doi,url,accessed,verification,relevance,locator,notes
+S01,journal,リモートワークと生産性の横断調査,Example Author,2024,Example Journal,10.1234/rw.2024.001,https://doi.org/10.1234/rw.2024.001,2026-10-20,verified,core,p.12,横断調査。相関分析のみ。n=300
+S02,web,ある企業のリモートワーク事例,Example Author,2023,Example Web,,https://example.org/case,2026-10-20,partial,supporting,,一事例のインタビュー
+S03,report,リモートワーク政策の提言,Example Author,2025,Example Institute,,https://example.org/report,2026-10-20,partial,supporting,p.3,提言レポート
+S04,web,専門家の意見,Example Author,2025,Example Web,,https://example.org/opinion,2026-10-20,unverified,context,,

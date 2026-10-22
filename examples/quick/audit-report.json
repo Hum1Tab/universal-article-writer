@@ -1,0 +1,171 @@
+{
+  "tool": "audit_article.py",
+  "version": "3.0.0",
+  "generated_at": "2026-10-22T14:52:47.884021+00:00",
+  "inputs": {
+    "article": "examples/quick/article.md",
+    "sources": "examples/quick/sources.csv",
+    "claims": "examples/quick/claims.csv"
+  },
+  "summary": {
+    "readiness": "READY",
+    "critical": 0,
+    "major": 0,
+    "minor": 3,
+    "info": 8,
+    "citations": 4,
+    "unique_sources_cited": 3,
+    "sources_in_ledger": 3,
+    "claims": 4,
+    "load_bearing_claims": 4,
+    "chars": 3091,
+    "paragraphs": 8,
+    "gate_counts": {
+      "G2": {
+        "minor": 3
+      },
+      "G5": {
+        "info": 8
+      }
+    },
+    "checks_run": [
+      "sources",
+      "claims",
+      "citation-markers",
+      "citation-sources",
+      "claim-markers",
+      "text"
+    ],
+    "limitations": [
+      "書誌情報・DOI・URL の実在は確認しない。Crossref / PubMed / 出版社で人間が確認すること。",
+      "引用が主張を本当に支えているかは判定しない。文脈の読解が必要である。",
+      "撤回・訂正の有無は sources.csv の verification に依存する。",
+      "数値の分母・単位・期間・集団の正しさは判定しない。",
+      "過剰表現・AI slop・長文の検出は語彙と長さのヒューリスティックであり、文脈を理解しない。",
+      "日本語の文分割は近似であり、英語の文分割は不完全である。",
+      "論証の妥当性、フレーム批判、反論の強さは判定しない。argument_lint.py と Phase 5 の人間監査が必要である。",
+      "価値前提の妥当性は判定しない。規範的主張は人間が確認すること。"
+    ]
+  },
+  "findings": [
+    {
+      "check": "citation-partial-source",
+      "severity": "minor",
+      "gate": "G2",
+      "line": 7,
+      "message": "出典 S01 は partial（一部のみ確認）である（2回）。",
+      "detail": "",
+      "evidence": {
+        "source_id": "S01",
+        "count": 2
+      },
+      "id": "F001"
+    },
+    {
+      "check": "citation-partial-source",
+      "severity": "minor",
+      "gate": "G2",
+      "line": 17,
+      "message": "出典 S02 は partial（一部のみ確認）である（1回）。",
+      "detail": "",
+      "evidence": {
+        "source_id": "S02",
+        "count": 1
+      },
+      "id": "F003"
+    },
+    {
+      "check": "citation-partial-source",
+      "severity": "minor",
+      "gate": "G2",
+      "line": 15,
+      "message": "出典 S03 は partial（一部のみ確認）である（1回）。",
+      "detail": "",
+      "evidence": {
+        "source_id": "S03",
+        "count": 1
+      },
+      "id": "F002"
+    },
+    {
+      "check": "long-sentence",
+      "severity": "info",
+      "gate": "G5",
+      "line": 3,
+      "message": "文が長い（292文字）。分割を検討する。",
+      "detail": "A paragraph with a citation looks more credible than one without. That is exactly why citation error",
+      "evidence": {},
+      "id": "F004"
+    },
+    {
+      "check": "long-sentence",
+      "severity": "info",
+      "gate": "G5",
+      "line": 7,
+      "message": "文が長い（369文字）。分割を検討する。",
+      "detail": "Walters and Wilder asked GPT-3.5 and GPT-4 to write short literature reviews on 42 topics. Across 84",
+      "evidence": {},
+      "id": "F005"
+    },
+    {
+      "check": "long-sentence",
+      "severity": "info",
+      "gate": "G5",
+      "line": 11,
+      "message": "文が長い（371文字）。分割を検討する。",
+      "detail": "The same study found a second failure: among citations to real papers, 43% of GPT-3.5 citations and ",
+      "evidence": {},
+      "id": "F006"
+    },
+    {
+      "check": "long-sentence",
+      "severity": "info",
+      "gate": "G5",
+      "line": 15,
+      "message": "文が長い（382文字）。分割を検討する。",
+      "detail": "It is tempting to ask the model to check its own references. Huang et al. studied intrinsic self-cor",
+      "evidence": {},
+      "id": "F007"
+    },
+    {
+      "check": "long-sentence",
+      "severity": "info",
+      "gate": "G5",
+      "line": 17,
+      "message": "文が長い（344文字）。分割を検討する。",
+      "detail": "Sycophancy adds another pressure. Sharma et al. found that five state-of-the-art assistants consiste",
+      "evidence": {},
+      "id": "F008"
+    },
+    {
+      "check": "long-sentence",
+      "severity": "info",
+      "gate": "G5",
+      "line": 21,
+      "message": "文が長い（481文字）。分割を検討する。",
+      "detail": "These findings do not prove that any particular writing protocol works. They do suggest a division o",
+      "evidence": {},
+      "id": "F009"
+    },
+    {
+      "check": "long-sentence",
+      "severity": "info",
+      "gate": "G5",
+      "line": 23,
+      "message": "文が長い（279文字）。分割を検討する。",
+      "detail": "This is slower than asking for a polished article in one turn. For a low-stakes memo, the overhead m",
+      "evidence": {},
+      "id": "F010"
+    },
+    {
+      "check": "long-sentence",
+      "severity": "info",
+      "gate": "G5",
+      "line": 27,
+      "message": "文が長い（426文字）。分割を検討する。",
+      "detail": "The evidence here comes from English-language studies of specific model versions, and the rates will",
+      "evidence": {},
+      "id": "F011"
+    }
+  ]
+}

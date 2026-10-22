@@ -1,0 +1,4 @@
+claim_id,section,claim,claim_type,evidence_ids,locator,warrant,confidence,counterevidence,status,load_bearing,falsifier
+C01,1,リモートワークは生産性を上げる,causal,S01,abstract,相関があるから因果がある,high,,supported,yes,
+C02,2,すべての企業でリモートワークは有効だ,descriptive,S02,abstract,一事例が成功したから,high,,supported,yes,反例が出れば撤回
+C03,3,全企業がリモートワークを導入すべきだ,evaluative,S03,abstract,,high,,supported,yes,

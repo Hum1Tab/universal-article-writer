@@ -1,0 +1,50 @@
+name: Feature request
+description: Propose a new adapter, eval case, reference, or protocol improvement.
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The best proposals describe a failure mode, not just a feature. What goes wrong today?
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What failure mode or user need does this address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: What should change? Keep it portable across AI hosts if possible.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence or prior art
+      description: Citations, links, or examples that support the proposal. It is fine to say "design rationale" if no direct evidence exists.
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - Core protocol
+        - Adapter
+        - Eval
+        - Documentation
+        - Tooling
+        - Translation
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues and docs.
+          required: true
+        - label: I am not asking for fabricated citations or unsupported claims.
+          required: true

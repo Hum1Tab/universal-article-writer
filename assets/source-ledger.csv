@@ -1,0 +1,4 @@
+id,type,title,authors,year,venue,doi,url,accessed,verification,relevance,locator,notes
+S01,journal,（記入例）遠隔勤務と生産性に関する無作為化比較試験,"田中 明; 鈴木 美咲; Chen, Wei",2024,"Journal of Example Studies 12(3), 45-67",10.0000/example.2024.001,https://doi.org/10.0000/example.2024.001,2026-10-20,verified,core,pp. 45-52,記入例。実際の文献情報に置き換える。RCT n=1200 3ヶ月 自己申告アウトカム
+S02,report,（記入例）労働生産性に関する公式統計,総務省統計局,2025,e-Stat,https://www.e-stat.go.jp/example,https://www.e-stat.go.jp/example,2026-10-20,verified,supporting,表2,記入例。定義・調査方法・改定履歴を確認
+S03,journal,（記入例）反対結果を示すコホート研究,Example Author,2023,Example Journal,10.0000/example.2023.002,https://doi.org/10.0000/example.2023.002,2026-10-20,partial,counter,§4,記入例。本文の一部のみ確認。反対証拠として保持

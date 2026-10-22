@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this protocol in research, teaching, or a published workflow, please cite it."
+title: "Universal Article Writer (論理記事工房)"
+abstract: >-
+  A portable, evidence-first protocol for writing and reviewing articles with
+  any AI. It externalizes sources and claims into ledgers, builds an argument
+  map, runs adversarial review, and checks citations before delivery.
+authors:
+  - name: "Universal Article Writer contributors"
+version: "3.0.0"
+date-released: "2026-10-22"
+license: MIT
+keywords:
+  - evidence-based writing
+  - argumentation
+  - citation verification
+  - large language models
+  - prompt engineering
+  - critical thinking
+  - research workflow

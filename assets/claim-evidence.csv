@@ -1,0 +1,4 @@
+claim_id,section,claim,claim_type,evidence_ids,locator,warrant,confidence,counterevidence,status,load_bearing,falsifier
+C01,3,週2日の在宅勤務は知識労働者の主観的生産性を高める,causal,S01,p.48,自己申告生産性が実際の成果と一定の相関を持つなら傾向を捉えられる,medium,S03,partially-supported,yes,同一職種・同期間のRCTで在宅群の客観的成果が対照群以下
+C02,4,在宅勤務の効果は職種の協働密度によって変わる,descriptive,S01;S03,§4,複数の研究で効果の方向が職種別に分かれている,low,,contested,yes,協働密度の高低で効果差が再現されない
+C03,2,日本の生産性統計は2020年以降の測定方法が変更されている,descriptive,S02,表2,定義変更があれば時系列比較に注意が必要,high,,supported,no,統計局が定義変更を否定

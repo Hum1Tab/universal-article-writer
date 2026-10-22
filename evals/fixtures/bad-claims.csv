@@ -1,0 +1,7 @@
+claim_id,section,claim,claim_type,evidence_ids,locator,warrant,confidence,counterevidence,status,load_bearing,falsifier
+C01,1,在宅勤務は生産性を上げる,causal,,,なし,high,,supported,yes,
+C02,2,すべての職種で有効だ,descriptive,S99,p.3,普遍的な効果がある,high,,supported,yes,反例が出れば撤回
+C03,2,柔軟な働き方が重要だ,evaluative,S03,p.3,専門家が支持している,high,,supported,no,
+C04,3,生産性は4.2%上昇した,descriptive,S01,p.12,調査結果が示している,medium,,supported,yes,
+C05,3,別の研究も同じ結論だ,descriptive,S01,p.12,複数の研究が一致している,medium,,supported,no,反例が出れば撤回
+C01,3,重複した主張,descriptive,S01,p.12,重複,low,,unverified,no,

@@ -1,0 +1,6 @@
+id,type,title,authors,year,venue,doi,url,accessed,verification,relevance,locator,notes
+S01,journal,有効な出典,Example Author,2024,Example Journal,10.0000/example.001,https://doi.org/10.0000/example.001,2026-10-20,verified,core,p.12,フィクスチャ
+S01,journal,重複した出典,Example Author,2024,Example Journal,10.0000/example.001,https://doi.org/10.0000/example.001,2026-10-20,verified,core,p.12,重複テスト
+S02,journal,撤回された出典,Example Author,2022,Example Journal,10.0000/example.002,https://doi.org/10.0000/example.002,2026-10-20,retracted,counter,p.5,撤回テスト
+S03,preprint,未確認の出典,Example Author,2025,Example Preprint,10.0000/example.003,https://doi.org/10.0000/example.003,2026-10-20,unverified,supporting,p.3,未確認テスト
+S04,web,検証状態が空の出典,Example Author,2026,Example Web,,https://example.com,2026-10-20,,context,,検証状態テスト

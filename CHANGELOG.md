@@ -4,6 +4,33 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [3.0.1] — 2026-10-23
+
+### Added
+
+- Japanese editing layer (`references/japanese-editing.md`) based on the seven
+  principles of [yomiyasu](https://github.com/nanaism/yomiyasu) (MIT): subject–
+  predicate alignment, sentence function and register, anthropomorphism,
+  metaphor verbs, lead-ins and negative contrast, no invented facts, sentence
+  length and comma control.
+- Phase 4.2 final Japanese pass and Phase 6 checklist item.
+- Optional `yomiyasu_lint.py` / `yomiyasu_diff.py` integration, with the caveat
+  that lint findings are review candidates, not pass/fail scores.
+
+### Changed
+
+- Reduced em dashes, trailing colons, and over-emphasis in `SKILL.md`,
+  `README.ja.md`, and the guide.
+- Renamed the Japanese prose label "品質ゲート" to "品質確認（G1〜G7）"; the
+  formal G1–G7 identifiers are unchanged.
+- Replaced "主張—証拠マトリクス" with "主張と証拠の対応表" in the Japanese
+  README and diagrams.
+
+### Fixed
+
+- A bold-rendering edge case in `README.ja.md`.
+- Stale Japanese wording in the Lite prompt and architecture guide.
+
 ## [3.0.0] — 2026-10-22
 
 ### Added

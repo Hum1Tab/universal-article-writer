@@ -46,6 +46,7 @@
 | `s4h-*` | human-avatar/skills-for-humanity | 要確認 | 確率較正、認識論的地位、三角測量、倫理評議会、システム思考 | Phase 0–5 |
 | `meta-analysis-skill` | O0000-code/meta-analysis-skill | PolyForm-NC + CC BY-NC-SA 4.0 | PRISMA 2020、GRADE、AMSTAR 2、二重スクリーニング、来歴ゲート | Phase 1–2、`knowledge-synthesis.md` |
 | `thinking-methods` | ysskrishna/ai-agent-skills | MIT | 方法の選択、critical-thinking、ethical-thinking、pre-mortem、trade-off | Phase 0、Phase 3 |
+| `yomiyasu` | nanaism/yomiyasu | MIT | 日本語の7原則、意味保持、主述・比喩・擬人化・文長・読点 | Phase 4.2、`japanese-editing.md` |
 
 **「要確認」のライセンス**：設計時にリポジトリの LICENSE を確認しきれなかったもの。再配布する場合は、必ず各リポジトリの LICENSE を確認すること。本スキルは、これらのスキルの文章をコピーしていないため、アイデアの参照として扱っている。
 
@@ -159,7 +160,17 @@ timpara/opencode-academic-research は、Cheng-I Wu による academic-research-
 - **critical-thinking / ethical-thinking / pre-mortem / trade-off**：判断の前に、弱点・価値・失敗・代替を確認する。
 - **light path と worked example**：小さな問いには短い手順、大きな問いには例付きの手順。
 
-### 3.12 v3.0 で新しく採用した知見
+### 3.12 nanaism — yomiyasu
+
+- **7つの変換原則**：主述・修飾・条件、文の働きと文体、擬人化、比喩動詞、前置きと否定対比、情報の不増補、文長・読点・装飾。
+- **意味の保持**：主張・比重・言い切りの強さ・文の働きを変えない。言い直しテストで6点を比較する。
+- **文書の種類と読者**：12種類の文書と3段階の読者で、残す書き方を変える。
+- **検査ツール**：`yomiyasu_lint.py`（表現・書式）、`yomiyasu_diff.py`（前後の比較）、`yomiyasu_check.py`（まとめ実行）。
+- **限界の明示**：lint の候補は合否ではない。意味の保持と読みやすさは人間が確認する。
+
+**ライセンス**：MIT。本スキルは原則を要約して再実装し、原文・プロンプト・検査コードを収録していない。
+
+### 3.13 v3.0 で新しく採用した知見
 
 1. **推論の型を明示する**（演繹・帰納・因果・最良説明・統計・規範・概念）。
 2. **隠れた前提の由来タグ**と charity ceiling。
@@ -171,6 +182,7 @@ timpara/opencode-academic-research は、Cheng-I Wu による academic-research-
 8. **概念分析**（必要十分条件、反例、文脈依存、操作的定義）。
 9. **役割分担とハンドオフ**（読解・抽出・方法論・統合・論理・規範・赤チーム・編集・監査）。
 10. **3つの機械監査**（記事・推論・書誌）。
+11. **日本語推敲層**（yomiyasu の7原則）。
 
 ---
 
@@ -201,7 +213,7 @@ timpara/opencode-academic-research は、Cheng-I Wu による academic-research-
 7. **3つの機械監査**：記事（`audit_article.py`）、推論（`argument_lint.py`）、書誌（`verify_sources.py`）。
 8. **Readiness の3段階**：Critical を平均で薄めない。
 9. **納品メッセージの契約**：結論、最強の反論、未解決の論点、論理判定、価値前提、ファイルパスを必ず含める。
-10. **4つのエンジン**：論理・統合・規範・オーケストレーションを、単体で動く参照ファイルとして内蔵する。
+10. **4つのエンジンと日本語推敲層**：論理・統合・規範・オーケストレーション、および yomiyasu 由来の日本語推敲を、単体で動く参照ファイルとして内蔵する。
 11. **推論の型と価値層の分離**：事実・推論・価値・表現を層に分け、上位層が下位層を上書きしない。
 12. **証拠の独立性の明示**：論文数ではなく、独立した研究・データセットを数える。
 13. **7ゲート**：G7（価値・規範）を追加し、倫理・政策の記事でも監査できる。
@@ -235,6 +247,7 @@ timpara/opencode-academic-research は、Cheng-I Wu による academic-research-
 - human-avatar, *skills-for-humanity* — https://github.com/human-avatar/skills-for-humanity
 - O0000-code, *meta-analysis-skill* — https://github.com/O0000-code/meta-analysis-skill (PolyForm-NC + CC BY-NC-SA 4.0)
 - ysskrishna, *Thinking Methods* — https://github.com/ysskrishna/ai-agent-skills (MIT)
+- nanaism, *yomiyasu* — https://github.com/nanaism/yomiyasu (MIT)
 - skills.sh — https://skills.sh
 
 **本スキルのライセンス**：MIT（`SKILL.md` の `license` フィールドに記載）。ただし、参照した第三者スキルのライセンスは、それぞれのリポジトリに従う。本スキルには、第三者の原文・プロンプト・図表を大量に含めていない。

@@ -1,4 +1,4 @@
-# 論理記事工房 — 詳細ガイド
+# 論理記事工房：詳細ガイド
 
 > GitHub のランディング README は [`../README.ja.md`](../README.ja.md)。
 > このファイルは、運用の詳細・出力契約・トラブルシューティングをまとめた
@@ -183,8 +183,8 @@ cp -R universal-article-writer .agents/skills/
 
 ### 引用マーカー
 
-- `[S01]` — 出典ID
-- `[S01: p.12]` — 頁付き
+- `[S01]`：出典ID
+- `[S01: p.12]`：頁付き
 - `[S01; S04]` — 複数出典
 - `[C03]` — 主張ID（本文に残す場合のみ）
 
@@ -192,9 +192,9 @@ cp -R universal-article-writer .agents/skills/
 
 ---
 
-## 7. 品質ゲート
+## 7. 品質確認（G1〜G7）
 
-Phase 5 の**7ゲートは G1〜G7**。G0 は受付です。
+Phase 5 の**7つの確認項目は G1〜G7**。G0 は受付です。
 
 | ゲート | Pass の条件 | Fail の例 |
 |---|---|---|
@@ -325,6 +325,7 @@ CSV は UTF-8（BOM 可）で保存してください。セルにカンマが入
 | `references/orchestration.md` | 役割、ハンドオフ、並列化、長文脈、停止規則。 |
 | `references/argument-architecture.md` | Toulmin、推論形式、反論、フレーム批判、構成、誤謬。 |
 | `references/drafting-protocol.md` | CEAL、グラウンディング、引用、数値、文体、AI slop。 |
+| `references/japanese-editing.md` | 日本語の7原則、意味保持、文長・読点、yomiyasu 連携。 |
 | `references/adversarial-review.md` | 7ゲート、赤チーム、Concession Threshold、監査手順。 |
 | `references/citation-and-provenance.md` | 出典台帳、引用マーカー、検証、撤回確認、引用スタイル。 |
 | `references/skill-stack.md` | 既存スキルとの対応、採用要素、出典・ライセンス。 |
@@ -363,6 +364,12 @@ CSV は UTF-8（BOM 可）で保存してください。セルにカンマが入
 ### 能力に合わせて出力を変える
 
 ファイルが使えるAIはファイルを作り、使えないAIはチャット内に同じ内容を出します。Web検索がなければ資料を求め、コード実行がなければ手動監査に切り替えます。**できないことを、できるふりにしない**のが設計の中心です。
+
+### 日本語の推敲
+
+日本語の記事は、`references/japanese-editing.md` の7原則で最終推敲します。主語と述語、修飾語の掛かる先、比喩動詞、擬人化、前置き、文長、読点を確認します。平均文長は30〜45文字、1文の読点は0〜2個を目安にします。意味・数値・否定・言い切りの強さは変えません。
+
+yomiyasu が使える場合は、最終稿に `yomiyasu_lint.py` と `yomiyasu_diff.py` を実行します。候補は直すべき指示ではなく、文脈を読んで残すか決めます。点数や候補数を合否にしません。
 
 ---
 
@@ -474,7 +481,7 @@ universal-article-writer/
 │   ├── gemini.md
 │   ├── coding-agents.md
 │   └── generic-chat.md
-├── references/                  # 11ファイル（4エンジン＋専門リファレンス）
+├── references/                  # 13ファイル（4エンジン＋日本語推敲＋専門リファレンス）
 ├── docs/                        # 根拠・設計・比較・評価・スキル調査・FAQ・公開手順
 ├── examples/                    # quick / review / chat-only
 ├── assets/                      # 6テンプレート＋バナー＋ソーシャルプレビュー
@@ -538,6 +545,7 @@ python scripts/build_universal.py --check
 
 ## 16. バージョン
 
-- **3.0.0** — 論理・統合・規範・分業の4エンジン、7ゲート、3監査、22評価ケース。
+- **3.0.1** — 日本語推敲層（yomiyasu の7原則）を追加。日本語の表記・比喩・文長・読点を最終推敲に組み込み、README と SKILL の日本語を整理。
+- **3.0.0** — 論理・統合・規範・分業の4エンジン、日本語推敲層、7つの確認項目、3監査、22評価ケース。
 - **2.0.0** — ユニバーサル版。特定のAI・ツールへの依存を外し、チャット出力モード、能力適応、Lite 版、プラットフォーム別アダプターを追加。
 - **1.0.0** — 初版。7フェーズ、証拠台帳、赤チーム監査、監査スクリプト。

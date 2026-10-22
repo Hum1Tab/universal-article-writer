@@ -40,7 +40,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
-VERSION = "3.0.0"
+VERSION = "3.0.1"
 
 ALLOWED_VERIFICATION = {
     "verified",

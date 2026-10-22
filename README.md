@@ -38,6 +38,9 @@ The core prompt is written in Japanese; the article language is a parameter.
   conceptual analysis, culture and “the Way.”
 - **Orchestration:** reader, extractor, methodologist, synthesizer, logician,
   normative analyst, red team, editor, auditor.
+- **Japanese editing:** the seven principles from yomiyasu (subject–predicate
+  alignment, metaphor, anthropomorphism, no invented facts, sentence length and
+  commas) as a final pass.
 - **Three deterministic audits:** `audit_article.py`, `argument_lint.py`,
   `verify_sources.py`.
 - **22 behavioral evals:** logic, probability, causation, synthesis, ethics,
@@ -384,7 +387,8 @@ see [`CITATION.cff`](CITATION.cff).
 
 The design draws on prior work; see [`references/skill-stack.md`](references/skill-stack.md)
 for influences and license notes. The surveyed skill ecosystem is mapped in
-[`docs/skill-landscape.md`](docs/skill-landscape.md). Research citations are listed in
+[`docs/skill-landscape.md`](docs/skill-landscape.md). Japanese editing follows
+[yomiyasu](https://github.com/nanaism/yomiyasu) (MIT). Research citations are listed in
 [`docs/evidence.md`](docs/evidence.md).
 
 ---

@@ -34,10 +34,10 @@ The current READMEs are structured for this. Keep them in sync.
 
 ## 3. Release
 
-Create a GitHub release `v3.0.0` with:
+Create a GitHub release `v3.0.1` with:
 
-- title: `v3.0.0 — Logic-First Edition`
-- short summary: any AI, seven phases, 4 engines, 7 gates, 3 audits, 22 evals
+- title: `v3.0.1 — Japanese Editing Edition`
+- short summary: any AI, seven phases, 4 engines + Japanese editing, 7 gates, 3 audits, 22 evals
 - link to `CHANGELOG.md`
 - attach `UNIVERSAL-PROMPT.md` and `UNIVERSAL-PROMPT-LITE.md` as release assets
 - note the known limitations and the manual-audit fallback

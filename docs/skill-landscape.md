@@ -51,6 +51,7 @@
 | 26 | `better-writing` / `brand-guidelines` / `internal-comms` | 各種 | 要確認 | 声のダイヤル、媒体適応、保存チェック | 声・媒体 |
 | 27 | `verification-before-completion` | obra/superpowers | 要確認 | 証拠なき完了宣言の禁止 | 完了ゲート |
 | 28 | `skill-creator` | anthropics/skills | 要確認 | description、評価、progressive disclosure | スキル設計 |
+| 29 | `yomiyasu` | https://github.com/nanaism/yomiyasu | MIT | 日本語の7原則、意味保持、主述・比喩・文長・読点、文書種類と読者 | 日本語推敲層 |
 
 **「要確認」**：設計時に LICENSE を確認しきれなかったもの。本リポジトリはこれらの文章をコピーしていないが、再配布・商用利用の際は必ず原リポジトリの LICENSE を確認すること。
 **CC-BY-NC / CC-BY-NC-SA**：非商用・継承の条件がある。本リポジトリは概念のみを参照し、原文を収録していない。商用利用を検討する場合は法的確認が必要である。
@@ -103,6 +104,14 @@
 - **修正論証チェーン**：指摘だけでなく、修正後の論証を出す。
 - **verification-before-completion**：監査していないのに「完了」と言わない。
 
+### 3.6 日本語推敲
+- **意味の保持を最優先**：主張・比重・言い切りの強さ・文の働きを変えない。
+- **構造を直す**：表層の禁止語ではなく、主述、修飾、条件、指示語の対応を直す。
+- **比喩動詞の言い換え**：含みを残し、普通の言葉にする。
+- **情報を足さない**：原文・依頼・資料にない主体・原因・数値・感情を作らない。
+- **文長と読点**：平均30〜45文字、1文0〜2個を目安にする。
+- **文書の種類と読者**：12種類の文書と3段階の読者で、残す書き方を変える。
+
 ---
 
 ## 4. v2.1 のギャップ
@@ -121,7 +130,7 @@
 
 ## 5. v3.0 の設計
 
-### 5.1 4つのエンジン
+### 5.1 4つのエンジンと日本語推敲
 
 | エンジン | ファイル | 役割 |
 |---|---|---|
@@ -129,6 +138,7 @@
 | 統合 | `references/knowledge-synthesis.md` | 多資料読解、独立性、PRISMA、メタ分析、不一致 |
 | 規範 | `references/normative-and-conceptual.md` | 価値前提、倫理理論、政策、概念分析、文化 |
 | 分業 | `references/orchestration.md` | 役割、ハンドオフ、並列化、長文脈、停止規則 |
+| 日本語推敲 | `references/japanese-editing.md` | 主述・比喩・擬人化・情報不増補・文長・読点 |
 
 ### 5.2 3つのスクリプト
 
@@ -181,5 +191,6 @@ G0 受付、G1 問いと結論、G2 証拠、G3 論理、G4 反論、G5 文章�
 - O0000-code, *meta-analysis-skill* — https://github.com/O0000-code/meta-analysis-skill (PolyForm-NC + CC BY-NC-SA 4.0)
 - ysskrishna, *Thinking Methods* — https://github.com/ysskrishna/ai-agent-skills (MIT)
 - skills.sh — https://skills.sh
+- nanaism, *yomiyasu* — https://github.com/nanaism/yomiyasu (MIT)
 
 **本リポジトリのライセンス**：MIT。ただし、参照した第三者スキルのライセンスは、それぞれのリポジトリに従う。本リポジトリには、第三者の原文・プロンプト・図表を大量に含めていない。

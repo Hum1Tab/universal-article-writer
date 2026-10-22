@@ -35,7 +35,7 @@ from urllib.parse import unquote
 ROOT = Path(__file__).resolve().parent.parent
 PYTHON = sys.executable
 OLD_ID = "-".join(["logical", "article", "writer"])
-VERSION = "3.0.0"
+VERSION = "3.0.1"
 
 TEXT_SUFFIXES = {
     ".md",
@@ -90,10 +90,12 @@ REQUIRED_FILES = [
     "docs/launch.md",
     "docs/guide.ja.md",
     "docs/skill-landscape.md",
+    "docs/japanese-review.md",
     "references/logic-and-inference.md",
     "references/knowledge-synthesis.md",
     "references/normative-and-conceptual.md",
     "references/orchestration.md",
+    "references/japanese-editing.md",
     "evals/evals.json",
     "evals/fixtures/good-article.md",
     "evals/fixtures/good-sources.csv",

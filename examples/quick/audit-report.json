@@ -1,7 +1,7 @@
 {
   "tool": "audit_article.py",
-  "version": "3.0.0",
-  "generated_at": "2026-10-22T14:52:47.884021+00:00",
+  "version": "3.0.1",
+  "generated_at": "2026-10-22T15:22:38.089081+00:00",
   "inputs": {
     "article": "examples/quick/article.md",
     "sources": "examples/quick/sources.csv",

@@ -1,7 +1,7 @@
 {
   "skill": "universal-article-writer",
   "display_name": "論理記事工房 ユニバーサル版",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "記事・論文を読み、証拠を統合し、論理・因果・規範を監査したうえで、反論に耐える記事を書くスキルの評価ケース。",
   "how_to_run": "各ケースの prompt を新しいセッションで実行し、must_do / must_not_do / artifacts を満たすか確認する。文章の質は rubric で 0〜2 点。最後に audit_article.py / argument_lint.py / verify_sources.py を実行する。",
   "rubric": {

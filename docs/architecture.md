@@ -30,7 +30,7 @@ flowchart LR
 | Resist citation theater | Every factual claim needs a source ID or `【未確認】`. |
 | Separate fact, inference, value, and prose | A higher layer cannot override a lower one. |
 | Be auditable | Three deterministic scripts check structure where possible. |
-| Stay small | Four engines, seven gates, six red-team roles; not an org chart. |
+| Stay small | Four engines plus a Japanese editing layer, seven gates, six red-team roles; not an org chart. |
 
 ## 2. The state model
 
@@ -74,7 +74,7 @@ can support a descriptive association; it cannot, by itself, support a causal
 claim. The protocol forces this distinction into the ledger instead of leaving
 it to prose.
 
-## 2.1 Four engines
+## 2.1 Four engines and a Japanese layer
 
 | Engine | File | Role |
 |---|---|---|
@@ -82,6 +82,7 @@ it to prose.
 | Synthesis | `references/knowledge-synthesis.md` | Multi-document reading, evidence independence, PRISMA, meta-analysis, disagreement |
 | Normative | `references/normative-and-conceptual.md` | Value premises, ethical frameworks, policy, conceptual analysis, culture |
 | Orchestration | `references/orchestration.md` | Roles, handoffs, parallel reading, long context, stop rules |
+| Japanese | `references/japanese-editing.md` | Subject–predicate alignment, metaphor, anthropomorphism, no invented facts, sentence length and commas |
 
 The engines are layered: evidence → inference → values → prose. A higher layer
 cannot change the lower layer's facts, citations, or uncertainty.

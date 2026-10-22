@@ -44,7 +44,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-VERSION = "3.0.0"
+VERSION = "3.0.1"
 
 SEVERITY_ORDER = {"critical": 0, "major": 1, "minor": 2, "info": 3}
 

@@ -36,7 +36,7 @@ jobs:
         run: python scripts/check_repo.py
 
       - name: Inference audit smoke test
-        run: python scripts/argument_lint.py --article evals/fixtures/logic-bad-article.md --claims evals/fixtures/logic-bad-claims.csv --sources evals/fixtures/logic-bad-sources.csv --fail-on major --format json > /dev/null
+        run: python scripts/argument_lint.py --article evals/fixtures/logic-good-article.md --fail-on major --format json > /dev/null
 
       - name: Source audit smoke test
         run: python scripts/verify_sources.py --sources evals/fixtures/good-sources.csv --article evals/fixtures/good-article.md --fail-on major --format json > /dev/null

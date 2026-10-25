@@ -1,0 +1,208 @@
+{
+  "version": "1.0.0",
+  "title": "（完全架空のサンプル原稿）",
+  "profile": "general",
+  "scope": "full",
+  "contest": {
+    "name": null,
+    "rules_url": null,
+    "rules_verified": false,
+    "eligibility": "unknown"
+  },
+  "dimensions": {
+    "originality": {
+      "max": 16,
+      "score": 11,
+      "evidence": [
+        {
+          "locator": "originality・前半",
+          "excerpt": "架空の描写（テスト用）",
+          "reason": "評価対象の効果を本文位置に紐づけた仮の説明"
+        },
+        {
+          "locator": "originality・後半",
+          "excerpt": "架空の別場面（テスト用）",
+          "reason": "離れた場面でも機能していることの仮の記録"
+        }
+      ],
+      "alternative": "意図的な余白とも解釈できる。反対読解の検証が必要。",
+      "confidence": "medium"
+    },
+    "voice": {
+      "max": 16,
+      "score": 11,
+      "evidence": [
+        {
+          "locator": "voice・前半",
+          "excerpt": "架空の描写（テスト用）",
+          "reason": "評価対象の効果を本文位置に紐づけた仮の説明"
+        },
+        {
+          "locator": "voice・後半",
+          "excerpt": "架空の別場面（テスト用）",
+          "reason": "離れた場面でも機能していることの仮の記録"
+        }
+      ],
+      "alternative": "意図的な余白とも解釈できる。反対読解の検証が必要。",
+      "confidence": "medium"
+    },
+    "character": {
+      "max": 16,
+      "score": 11,
+      "evidence": [
+        {
+          "locator": "character・前半",
+          "excerpt": "架空の描写（テスト用）",
+          "reason": "評価対象の効果を本文位置に紐づけた仮の説明"
+        },
+        {
+          "locator": "character・後半",
+          "excerpt": "架空の別場面（テスト用）",
+          "reason": "離れた場面でも機能していることの仮の記録"
+        }
+      ],
+      "alternative": "意図的な余白とも解釈できる。反対読解の検証が必要。",
+      "confidence": "medium"
+    },
+    "structure": {
+      "max": 16,
+      "score": 11,
+      "evidence": [
+        {
+          "locator": "structure・前半",
+          "excerpt": "架空の描写（テスト用）",
+          "reason": "評価対象の効果を本文位置に紐づけた仮の説明"
+        },
+        {
+          "locator": "structure・後半",
+          "excerpt": "架空の別場面（テスト用）",
+          "reason": "離れた場面でも機能していることの仮の記録"
+        }
+      ],
+      "alternative": "意図的な余白とも解釈できる。反対読解の検証が必要。",
+      "confidence": "medium"
+    },
+    "theme": {
+      "max": 14,
+      "score": 10,
+      "evidence": [
+        {
+          "locator": "theme・前半",
+          "excerpt": "架空の描写（テスト用）",
+          "reason": "評価対象の効果を本文位置に紐づけた仮の説明"
+        },
+        {
+          "locator": "theme・後半",
+          "excerpt": "架空の別場面（テスト用）",
+          "reason": "離れた場面でも機能していることの仮の記録"
+        }
+      ],
+      "alternative": "意図的な余白とも解釈できる。反対読解の検証が必要。",
+      "confidence": "medium"
+    },
+    "setting": {
+      "max": 8,
+      "score": 5,
+      "evidence": [
+        {
+          "locator": "setting・前半",
+          "excerpt": "架空の描写（テスト用）",
+          "reason": "評価対象の効果を本文位置に紐づけた仮の説明"
+        },
+        {
+          "locator": "setting・後半",
+          "excerpt": "架空の別場面（テスト用）",
+          "reason": "離れた場面でも機能していることの仮の記録"
+        }
+      ],
+      "alternative": "意図的な余白とも解釈できる。反対読解の検証が必要。",
+      "confidence": "medium"
+    },
+    "consistency": {
+      "max": 8,
+      "score": 5,
+      "evidence": [
+        {
+          "locator": "consistency・前半",
+          "excerpt": "架空の描写（テスト用）",
+          "reason": "評価対象の効果を本文位置に紐づけた仮の説明"
+        },
+        {
+          "locator": "consistency・後半",
+          "excerpt": "架空の別場面（テスト用）",
+          "reason": "離れた場面でも機能していることの仮の記録"
+        }
+      ],
+      "alternative": "意図的な余白とも解釈できる。反対読解の検証が必要。",
+      "confidence": "medium"
+    },
+    "audience": {
+      "max": 6,
+      "score": 4,
+      "evidence": [
+        {
+          "locator": "audience・前半",
+          "excerpt": "架空の描写（テスト用）",
+          "reason": "評価対象の効果を本文位置に紐づけた仮の説明"
+        },
+        {
+          "locator": "audience・後半",
+          "excerpt": "架空の別場面（テスト用）",
+          "reason": "離れた場面でも機能していることの仮の記録"
+        }
+      ],
+      "alternative": "意図的な余白とも解釈できる。反対読解の検証が必要。",
+      "confidence": "medium"
+    }
+  },
+  "total": 68,
+  "panel": {
+    "language": {
+      "support": "語りに固有性がある",
+      "concern": "韻律が単調になる場面",
+      "change_condition": "中盤の本文を再検証"
+    },
+    "story": {
+      "support": "変化の方向性は見える",
+      "concern": "選択の因果が弱い",
+      "change_condition": "転換の前後に動機が明示される"
+    },
+    "originality": {
+      "support": "既視感を回避する工夫",
+      "concern": "素材の個別性が足りない",
+      "change_condition": "形式が主題とさらに結びつく"
+    },
+    "editor": {
+      "support": "導入の問いがある",
+      "concern": "想定読者の入口が狭い",
+      "change_condition": "冒頭の情報配置が変わる"
+    }
+  },
+  "blockers": [],
+  "revision_priorities": [
+    {
+      "locator": "第2場面",
+      "goal": "人物の選択を必然化",
+      "edit": "前段に行為の対価を配置",
+      "protect": "省略の緊張感",
+      "check": "転換が説明抜きで伝わるか"
+    },
+    {
+      "locator": "中盤",
+      "goal": "停滞の意味を明確化",
+      "edit": "反復する場面に差異を置く",
+      "protect": "静謐な語り",
+      "check": "反復が人物の認識を変えるか"
+    },
+    {
+      "locator": "終盤",
+      "goal": "主題の回収",
+      "edit": "序盤のモチーフと響かせる",
+      "protect": "余韻と多義性",
+      "check": "説明過多になっていないか"
+    }
+  ],
+  "limitations": [
+    "これは実在しない架空の入力から作った形式テスト用のレポートである。審査の正しさは示さない。"
+  ]
+}

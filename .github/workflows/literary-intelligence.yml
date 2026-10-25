@@ -1,0 +1,29 @@
+name: Literary Intelligence validation
+on:
+  pull_request:
+    paths:
+      - "skills/literary-intelligence/**"
+      - ".github/workflows/literary-intelligence.yml"
+  push:
+    branches:
+      - "feature/literary-intelligence-theory-engine"
+    paths:
+      - "skills/literary-intelligence/**"
+      - ".github/workflows/literary-intelligence.yml"
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile and contract tests
+        run: |
+          python -m compileall -q skills/literary-intelligence/scripts
+          python -m unittest discover -s skills/literary-intelligence/tests -p "test_*.py" -v
+      - name: Validate example and quotation provenance
+        run: |
+          python skills/literary-intelligence/scripts/validate_report.py \
+            skills/literary-intelligence/examples/sample-report.json \
+            --manuscript skills/literary-intelligence/examples/manuscript.txt

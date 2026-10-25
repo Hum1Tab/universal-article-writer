@@ -1,0 +1,194 @@
+{
+  "schema_version": "1.0.0",
+  "title": "封筒（テスト用の架空抜粋）",
+  "coverage": "partial",
+  "numeric_requested": false,
+  "evidence": [
+    {
+      "id": "E1",
+      "locator": "第1段落",
+      "quote": "返却先のない封筒",
+      "observation": "封筒に返却先がないと記述される",
+      "area": "opening"
+    },
+    {
+      "id": "E2",
+      "locator": "第2段落",
+      "quote": "宛名だけが変わっていた",
+      "observation": "配置は同じなのに宛名が変化",
+      "area": "local"
+    }
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "type": "interpretive",
+      "claim": "返却できないものと変化する名前の間の緊張が描かれる",
+      "evidence_ids": [
+        "E1",
+        "E2"
+      ],
+      "warrant": "同じ対象に変化しない側面と変化する側面が並置されている",
+      "value_premise": "反復により見慣れたものが異様に見える経験を重視する",
+      "counterreading": "単に謎を出すための導入かもしれず、文学的な異化と確定できない",
+      "status": "contested",
+      "confidence": "low",
+      "change_condition": "作品全体で封筒と名前の意味がどう展開するかを確認する"
+    }
+  ],
+  "quality": {
+    "Q1": {
+      "status": "mixed",
+      "rationale": "封筒と宛名の変化という局所的な手掛かりだけでは評価が限定される",
+      "evidence_ids": [
+        "E1"
+      ],
+      "score": null,
+      "confidence": "low"
+    },
+    "Q2": {
+      "status": "mixed",
+      "rationale": "封筒と宛名の変化という局所的な手掛かりだけでは評価が限定される",
+      "evidence_ids": [
+        "E1"
+      ],
+      "score": null,
+      "confidence": "low"
+    },
+    "Q3": {
+      "status": "mixed",
+      "rationale": "封筒と宛名の変化という局所的な手掛かりだけでは評価が限定される",
+      "evidence_ids": [
+        "E1"
+      ],
+      "score": null,
+      "confidence": "low"
+    },
+    "Q4": {
+      "status": "mixed",
+      "rationale": "封筒と宛名の変化という局所的な手掛かりだけでは評価が限定される",
+      "evidence_ids": [
+        "E1"
+      ],
+      "score": null,
+      "confidence": "low"
+    },
+    "Q5": {
+      "status": "mixed",
+      "rationale": "封筒と宛名の変化という局所的な手掛かりだけでは評価が限定される",
+      "evidence_ids": [
+        "E1"
+      ],
+      "score": null,
+      "confidence": "low"
+    },
+    "Q6": {
+      "status": "mixed",
+      "rationale": "封筒と宛名の変化という局所的な手掛かりだけでは評価が限定される",
+      "evidence_ids": [
+        "E1"
+      ],
+      "score": null,
+      "confidence": "low"
+    },
+    "Q7": {
+      "status": "mixed",
+      "rationale": "封筒と宛名の変化という局所的な手掛かりだけでは評価が限定される",
+      "evidence_ids": [
+        "E1"
+      ],
+      "score": null,
+      "confidence": "low"
+    },
+    "Q8": {
+      "status": "not_applicable",
+      "rationale": "この抜粋の文脈では比較元のジャンル慣習が確認できない",
+      "evidence_ids": [],
+      "score": null,
+      "confidence": "low"
+    },
+    "Q9": {
+      "status": "mixed",
+      "rationale": "封筒と宛名の変化という局所的な手掛かりだけでは評価が限定される",
+      "evidence_ids": [
+        "E1"
+      ],
+      "score": null,
+      "confidence": "low"
+    },
+    "Q10": {
+      "status": "unknown",
+      "rationale": "表現的挑戦の成否を判定するには全体が必要",
+      "evidence_ids": [],
+      "score": null,
+      "confidence": "low"
+    }
+  },
+  "lenses": [
+    {
+      "id": "L1",
+      "applicable": true,
+      "reasoning": "局所的な表現と情報開示を検討可能",
+      "opposing_reasoning": "全文がないため解釈は暫定的。別の読みが成立する"
+    },
+    {
+      "id": "L2",
+      "applicable": true,
+      "reasoning": "局所的な表現と情報開示を検討可能",
+      "opposing_reasoning": "全文がないため解釈は暫定的。別の読みが成立する"
+    },
+    {
+      "id": "L3",
+      "applicable": true,
+      "reasoning": "局所的な表現と情報開示を検討可能",
+      "opposing_reasoning": "全文がないため解釈は暫定的。別の読みが成立する"
+    },
+    {
+      "id": "L4",
+      "applicable": true,
+      "reasoning": "局所的な表現と情報開示を検討可能",
+      "opposing_reasoning": "全文がないため解釈は暫定的。別の読みが成立する"
+    },
+    {
+      "id": "L5",
+      "applicable": true,
+      "reasoning": "局所的な表現と情報開示を検討可能",
+      "opposing_reasoning": "全文がないため解釈は暫定的。別の読みが成立する"
+    },
+    {
+      "id": "L6",
+      "applicable": true,
+      "reasoning": "局所的な表現と情報開示を検討可能",
+      "opposing_reasoning": "全文がないため解釈は暫定的。別の読みが成立する"
+    },
+    {
+      "id": "L7",
+      "applicable": true,
+      "reasoning": "局所的な表現と情報開示を検討可能",
+      "opposing_reasoning": "全文がないため解釈は暫定的。別の読みが成立する"
+    },
+    {
+      "id": "L8",
+      "applicable": false,
+      "reasoning": "モデル由来のバイアスは今回検証対象ではない",
+      "opposing_reasoning": "全文がないため解釈は暫定的。別の読みが成立する"
+    }
+  ],
+  "reader_effects": [
+    {
+      "claim": "謎による興味を誘う可能性がある",
+      "kind": "predicted",
+      "evidence_ids": [
+        "E1",
+        "E2"
+      ],
+      "measured_source": null
+    }
+  ],
+  "revisions": [],
+  "limitations": [
+    "実在作品の評価ではなく、架空の2文段落に対するJSON形式確認の例",
+    "全文ではないため全体の評価を保留"
+  ],
+  "universal_score": null
+}

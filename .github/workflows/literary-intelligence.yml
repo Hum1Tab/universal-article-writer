@@ -22,6 +22,16 @@ jobs:
         run: |
           python -m compileall -q skills/literary-intelligence/scripts
           python -m unittest discover -s skills/literary-intelligence/tests -p "test_*.py" -v
+      - name: Package standalone Agent Skill
+        run: |
+          cd skills
+          zip -qr literary-intelligence.zip literary-intelligence
+      - name: Upload standalone Agent Skill
+        uses: actions/upload-artifact@v4
+        with:
+          name: literary-intelligence-skill
+          path: skills/literary-intelligence.zip
+          retention-days: 90
       - name: Validate example and quotation provenance
         run: |
           python skills/literary-intelligence/scripts/validate_report.py \

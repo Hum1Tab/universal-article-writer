@@ -35,6 +35,9 @@ jobs:
       - name: Repository checks
         run: python scripts/check_repo.py
 
+      - name: Consistency self-test
+        run: python scripts/selftest_consistency.py
+
       - name: Inference audit smoke test
         run: python scripts/argument_lint.py --article evals/fixtures/logic-good-article.md --fail-on major --format json > /dev/null
 

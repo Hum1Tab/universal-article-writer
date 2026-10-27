@@ -341,7 +341,7 @@ universal-article-writer/
 ├── docs/                      # 根拠・設計ノート・比較・評価・スキル調査・FAQ・公開手順
 ├── examples/                  # quick・review・chat-only
 ├── evals/                     # 23ケース＋fixtures
-├── scripts/                   # 3監査・プロンプト生成・リポジトリ検査
+├── scripts/                   # 記事監査・決定メモ監査・プロンプト生成・リポジトリ検査
 └── .github/                   # CI＋Issue/PRテンプレート
 ```
 

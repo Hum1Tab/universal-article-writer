@@ -42,7 +42,7 @@ The core prompt is written in Japanese; the article language is a parameter.
   alignment, metaphor, anthropomorphism, no invented facts, sentence length and
   commas) as a final pass.
 - **Three deterministic audits:** `audit_article.py`, `argument_lint.py`,
-  `verify_sources.py`.
+  `verify_sources.py`. `decision` memos use `audit_decision.py`.
 - **Behavioral evals:** logic, probability, causation, synthesis, ethics,
   conceptual analysis, and resistance to pressure.
 
@@ -119,6 +119,7 @@ flowchart LR
 | **Six red-team roles** | Empiricist, Logician, Contrarian, Normative analyst, Practitioner, Reader. |
 | **Seven gates** | Question/thesis, evidence, logic, objection, prose, completeness, values. |
 | **Three deterministic audits** | Article (citations, claims, prose), inference (correlation→cause, fallacies), bibliography (DOI, duplicates, retraction). |
+| **Decision audit** | Decision memos: options, criteria order, exit conditions, reversibility. |
 | **Dossier** | Tells a skeptical reader what is known, what is uncertain, and what would change the conclusion. |
 
 ### The non-negotiable rules
@@ -366,7 +367,7 @@ universal-article-writer/
 ├── docs/                      # evidence, design notes, architecture, comparison, benchmark, skill landscape, FAQ, launch
 ├── examples/                  # quick, review, chat-only
 ├── evals/                     # 23 cases + fixtures
-├── scripts/                   # three audits + prompt builder + repo checks
+├── scripts/                   # article audits + decision audit + prompt builder + repo checks
 └── .github/                   # CI + issue/PR templates
 ```
 

@@ -329,7 +329,7 @@ universal-article-writer/
 ├── docs/                      # 证据、设计说明、架构、比较、评价、技能调查、FAQ、发布
 ├── examples/                  # quick、review、chat-only
 ├── evals/                     # 23 个案例＋fixtures
-├── scripts/                   # 三项审计、提示词生成、仓库检查
+├── scripts/                   # 文章审计、决策备忘录审计、提示词生成、仓库检查
 └── .github/                   # CI＋Issue/PR 模板
 ```
 

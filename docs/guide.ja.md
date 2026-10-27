@@ -284,6 +284,20 @@ PowerShell では行末の `\` を `` ` `` に変えてください。
 - 本文が参照する出典IDの欠落
 - `--online` を付けた場合の到達性（失敗しても停止しない）
 
+### audit_decision.py が検査するもの
+
+`decision` モードの決定メモを検査します。記事用の `audit_article.py` とは別です。
+
+- 決定・選択肢・評価基準・トレードオフ・推奨・撤退条件・未確認の見出し
+- 決定が1文か（長すぎないか）
+- 現状維持を含む3つ以上の選択肢
+- 評価基準が評価表より前にあるか
+- 撤退条件に指標・閾値・時点があるか
+- 可逆性の分類
+- `【未確認】` の残り
+
+意味内容・証拠の真偽・トレードオフの妥当性は判定しません。
+
 ### 終了コード
 
 | コード | 意味 |
@@ -303,7 +317,7 @@ PowerShell では行末の `\` を `` ` `` に変えてください。
 - 日本語の文分割は近似です。
 
 機械監査が通っても、Phase 5 の人間監査と、専門家の確認は必要です。
-スクリプトを実行できないAIは、`UNIVERSAL-PROMPT.md` の「10. 完了前チェック」を手動で行い、その旨を明記してください。
+スクリプトを実行できないAIは、`UNIVERSAL-PROMPT.md` の「9. 完了前チェック」を手動で行い、その旨を明記してください。
 
 ---
 
@@ -380,7 +394,7 @@ yomiyasu が使える場合は、最終稿に `yomiyasu_lint.py` と `yomiyasu_d
 
 ## 11. 評価
 
-`evals/evals.json` に、23の行動評価ケースと7つのスクリプト回帰テスト（R01–R03、R06–R09）があります。`scripts/check_repo.py` はさらに R04（`--strict`）と R05（入力なし）を検証します。
+`evals/evals.json` に、23の行動評価ケースと7つのスクリプト回帰テスト（R01–R03、R06–R09）があります。`scripts/check_repo.py` はさらに R04（`--strict`）と R05（入力なし）、D01/D02（決定メモ監査）を検証します。
 
 - 短い論考（quick）
 - ユーザーの結論への迎合を拒否
@@ -492,6 +506,7 @@ universal-article-writer/
 ├── assets/                      # 7テンプレート＋バナー＋ソーシャルプレビュー
 ├── scripts/
 │   ├── audit_article.py
+│   ├── audit_decision.py        # 決定メモの監査
 │   ├── argument_lint.py
 │   ├── verify_sources.py
 │   ├── build_universal.py       # UNIVERSAL-PROMPT.md の生成

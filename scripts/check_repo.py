@@ -28,6 +28,7 @@ import re
 import shutil
 import subprocess
 import sys
+from collections import Counter
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Set, Tuple
@@ -116,6 +117,8 @@ REQUIRED_FILES = [
     "evals/fixtures/logic-bad-article.md",
     "evals/fixtures/logic-bad-claims.csv",
     "evals/fixtures/logic-bad-sources.csv",
+    "evals/fixtures/decision-good.md",
+    "evals/fixtures/decision-bad.md",
     "examples/quick/article.md",
     "examples/quick/sources.csv",
     "examples/quick/claims.csv",
@@ -127,6 +130,7 @@ REQUIRED_FILES = [
     "examples/review/README.md",
     "examples/chat-only/transcript.md",
     "scripts/audit_article.py",
+    "scripts/audit_decision.py",
     "scripts/argument_lint.py",
     "scripts/verify_sources.py",
     "scripts/build_universal.py",
@@ -487,7 +491,41 @@ def check_evals() -> None:
 
 
 # ---------------------------------------------------------------------------
-# 4. JSON and CSV fixtures
+# 4. Trigger prompt suites
+# ---------------------------------------------------------------------------
+
+
+def check_trigger_suites() -> None:
+    print("\n== Trigger prompt suites ==")
+    for rel_path in ["evals/trigger-prompts.json", "evals/trigger-prompts-heldout.json"]:
+        path = ROOT / rel_path
+        if not path.is_file():
+            R.fail("{} is missing".format(rel_path))
+            continue
+        try:
+            data = json.loads(read_text(path))
+        except Exception as exc:
+            R.fail("{} is not valid JSON".format(rel_path), str(exc))
+            continue
+        prompts = data.get("prompts")
+        if not isinstance(prompts, list) or len(prompts) != 24:
+            R.fail("{} must contain 24 prompts".format(rel_path))
+            continue
+        ids = [prompt.get("id") for prompt in prompts if isinstance(prompt, dict)]
+        labels = Counter(prompt.get("label") for prompt in prompts if isinstance(prompt, dict))
+        texts_ok = all(isinstance(prompt.get("text"), str) and prompt["text"].strip() for prompt in prompts)
+        if ids != list(range(1, 25)):
+            R.fail("{} prompt ids must be 1..24".format(rel_path), "found: {}".format(ids))
+        elif labels.get("heavy") != 12 or labels.get("light") != 12:
+            R.fail("{} must have 12 heavy and 12 light prompts".format(rel_path), dict(labels))
+        elif not texts_ok:
+            R.fail("{} has an empty prompt".format(rel_path))
+        else:
+            R.ok("{} has 24 prompts (12 heavy / 12 light)".format(rel_path))
+
+
+# ---------------------------------------------------------------------------
+# 5. JSON and CSV fixtures
 # ---------------------------------------------------------------------------
 
 
@@ -741,6 +779,45 @@ def run_tool(
 
 def run_audit(args: List[str], out_path: Optional[Path] = None) -> Tuple[subprocess.CompletedProcess, Optional[dict]]:
     return run_tool("audit_article.py", args, out_path)
+
+
+def check_decision_audit() -> None:
+    print("\n== Decision memo audit ==")
+    script = ROOT / "scripts" / "audit_decision.py"
+    if not script.is_file():
+        R.skip("audit_decision.py is missing")
+        return
+
+    with check_tmpdir() as tmp:
+        out = tmp / "decision-good.json"
+        proc, data = run_tool(
+            "audit_decision.py",
+            ["--memo", "evals/fixtures/decision-good.md"],
+            out,
+        )
+        if proc.returncode == 0 and data:
+            summary = data.get("summary", {})
+            if summary.get("readiness") == "READY" and summary.get("critical") == 0:
+                R.ok("decision-good fixture -> READY, exit 0")
+            else:
+                R.fail("decision-good fixture must be READY", json.dumps(summary, ensure_ascii=False))
+        else:
+            R.fail("decision-good fixture failed", short_output(proc))
+
+        out = tmp / "decision-bad.json"
+        proc, data = run_tool(
+            "audit_decision.py",
+            ["--memo", "evals/fixtures/decision-bad.md"],
+            out,
+        )
+        if proc.returncode == 2 and data:
+            summary = data.get("summary", {})
+            if summary.get("readiness") == "NOT READY" and int(summary.get("critical", 0)) >= 3:
+                R.ok("decision-bad fixture -> NOT READY, exit 2")
+            else:
+                R.fail("decision-bad fixture must be NOT READY", json.dumps(summary, ensure_ascii=False))
+        else:
+            R.fail("decision-bad fixture failed", short_output(proc))
 
 
 def check_audit_regressions() -> None:
@@ -1036,11 +1113,13 @@ def main() -> int:
     check_generated_prompt()
     check_consistency()
     check_evals()
+    check_trigger_suites()
     check_example_report()
     check_csv_fixtures()
     check_links()
     check_old_id()
     check_placeholders()
+    check_decision_audit()
     check_audit_regressions()
     check_examples()
 

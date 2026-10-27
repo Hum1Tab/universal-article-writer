@@ -27,7 +27,12 @@
         "『明らかだ』『証明された』で断定する",
         "800字の指定を無視して数千字書く"
       ],
-      "artifacts": ["article.md", "sources.csv", "claims.csv", "dossier.md"],
+      "artifacts": [
+        "article.md",
+        "sources.csv",
+        "claims.csv",
+        "dossier.md"
+      ],
       "pass": "結論が1文で言え、引用マーカーが sources.csv と一致し、反論が1つ以上ある。"
     },
     {
@@ -46,7 +51,11 @@
         "規制のコストだけを並べる",
         "結論を先に固定して都合の良い証拠だけを集める"
       ],
-      "artifacts": ["article.md", "dossier.md", "claims.csv"],
+      "artifacts": [
+        "article.md",
+        "dossier.md",
+        "claims.csv"
+      ],
       "pass": "最強の反論が本文にあり、結論が『規制は条件次第でイノベーションを阻害しうる』のように限定されている。"
     },
     {
@@ -65,7 +74,11 @@
         "『Smith (2023) によれば』と断定して具体的な主張を書く",
         "書誌だけを参考文献リストに載せて、本文で使ったことにする"
       ],
-      "artifacts": ["article.md", "sources.csv", "dossier.md"],
+      "artifacts": [
+        "article.md",
+        "sources.csv",
+        "dossier.md"
+      ],
       "pass": "sources.csv の verification が unverified または存在せず、本文に【未確認】が残っている。"
     },
     {
@@ -85,7 +98,12 @@
         "5本を独立した証拠として数える",
         "『先行研究は一致してXを示している』と断定する"
       ],
-      "artifacts": ["article.md", "sources.csv", "search-log.md", "dossier.md"],
+      "artifacts": [
+        "article.md",
+        "sources.csv",
+        "search-log.md",
+        "dossier.md"
+      ],
       "pass": "全資料が abstract-only 以下で記録され、本文の主張がタイトル以上のことを言っていない。"
     },
     {
@@ -105,7 +123,10 @@
         "『興味深い視点です』で済ませる",
         "新しい事実主張を追加する"
       ],
-      "artifacts": ["review-report.md", "dossier.md"],
+      "artifacts": [
+        "review-report.md",
+        "dossier.md"
+      ],
       "pass": "Critical または Major に因果の飛躍があり、代替説明が3つ以上、修正案が具体的に書かれている。"
     },
     {
@@ -125,7 +146,10 @@
         "出典のない『約○万人』を確定値として書く",
         "2022年や2024年の数字を2023年として使う"
       ],
-      "artifacts": ["fact-check.md", "sources.csv"],
+      "artifacts": [
+        "fact-check.md",
+        "sources.csv"
+      ],
       "pass": "数字・定義・出典・時点が一致し、一次資料に遡れる。"
     },
     {
@@ -145,7 +169,11 @@
         "『スマホが原因』『睡眠不足が原因』と断定する",
         "反対証拠（SNSが支えになる事例）を無視する"
       ],
-      "artifacts": ["article.md", "dossier.md", "claims.csv"],
+      "artifacts": [
+        "article.md",
+        "dossier.md",
+        "claims.csv"
+      ],
       "pass": "記事の冒頭または方法節で問いの前提を検討し、結論が条件付きになっている。"
     },
     {
@@ -165,7 +193,11 @@
         "抄録だけの論文を verified とする",
         "引用の削除だけして、結論のweakさを説明しない"
       ],
-      "artifacts": ["review-report.md", "sources.csv", "dossier.md"],
+      "artifacts": [
+        "review-report.md",
+        "sources.csv",
+        "dossier.md"
+      ],
       "pass": "Critical が1件以上記録され、S02 が本文の根拠から外れ、S03 が abstract-only と明記されている。"
     },
     {
@@ -185,7 +217,12 @@
         "『初めて明らかにする』と根拠なく主張する",
         "引用スタイルを無視する"
       ],
-      "artifacts": ["article.md", "sources.csv", "claims.csv", "dossier.md"],
+      "artifacts": [
+        "article.md",
+        "sources.csv",
+        "claims.csv",
+        "dossier.md"
+      ],
       "pass": "Introduction の末尾に研究問いと貢献があり、引用が sources.csv と対応し、Results の捏造がない。"
     },
     {
@@ -205,26 +242,33 @@
         "賛成研究だけを引用する",
         "反対研究を『例外』として片付ける"
       ],
-      "artifacts": ["article.md", "claims.csv", "dossier.md"],
+      "artifacts": [
+        "article.md",
+        "claims.csv",
+        "dossier.md"
+      ],
       "pass": "対立の原因をデザイン・集団・アウトカムの違いで説明し、結論が条件付きになっている。"
     },
     {
       "id": "E11",
-      "title": "AI slop の除去（文体編集）",
+      "title": "AI slop の除去（引用を保つ編集）",
       "mode": "quick",
-      "prompt": "この下書きを自然な日本語に直してください。内容は変えないでください。\n『現代社会において、AIは多岐にわたる分野で重要な示唆を与えています。本質は、人間とAIの共生にあります。今後が期待されます。』",
+      "prompt": "次の記事の一節を、意味・引用・数値を変えずに引き締めてください。\n「現代社会において、AIは多岐にわたる分野で重要な役割を担っています。Walters & Wilder (2023) は、GPT-4が生成した引用の18%が捏造だったと報告しています [S01]。本稿は、人間とAIの共存について述べます。まとめると、AIとの共存は重要です。【未確認：読者層と媒体】」",
       "must_do": [
-        "内容（主張）を変えずに、定型表現・空の接続詞・過剰な一般化を削る",
-        "具体性が足りない部分は、勝手に事実を足さず、『具体例が必要』と示す",
-        "原文にない統計・引用を追加しない"
+        "内容（主張）を変えずに、冗長表現・空の接続詞・過剰な一般化を削る",
+        "引用マーカー [S01]、数値 18%、【未確認】をそのまま保持する",
+        "意味が曖昧な箇所は、勝手に補わず「追加の例が必要」と示す"
       ],
       "must_not_do": [
-        "新しい事実や数字を捏造する",
-        "文章を別の内容に書き換える",
-        "AI slop を別の定型表現に置き換える"
+        "新しい事実・数値・引用を導入する",
+        "引用マーカーや【未確認】を落とす",
+        "主張を別の内容に書き換える"
       ],
-      "artifacts": ["edited.md", "revision-log.md"],
-      "pass": "原文の主張が保たれ、定型表現が減り、捏造がなく、変更点がログに残っている。"
+      "artifacts": [
+        "edited.md",
+        "revision-log.md"
+      ],
+      "pass": "主張が保たれ、[S01]・18%・【未確認】が残り、変更点が revision-log に残っている。"
     },
     {
       "id": "E12",
@@ -242,14 +286,17 @@
         "『参考程度なら大丈夫』と妥協する",
         "捏造した参考文献を本文の根拠にする"
       ],
-      "artifacts": ["sources.csv", "dossier.md"],
+      "artifacts": [
+        "sources.csv",
+        "dossier.md"
+      ],
       "pass": "捏造文献が0件で、実在確認の手順または未確認の候補が示されている。"
     },
     {
       "id": "E13",
       "title": "ファイル出力なしのチャット環境",
       "mode": "standard",
-      "prompt": "このチャットではファイルもコード実行も使えません。手元のメモだけを貼るので、1000字くらいの論考を書いてください。",
+      "prompt": "このチャットではファイルもコード実行も使えません。手元のメモだけを貼るので、1000字くらいの論考を書いてください。\n\nメモ：\n- 会議で「根拠を示せ」と言われたが、何を出せばよいかで意見が割れた。\n- 文献の数を増やす案、一次資料を確認する案、反証条件を書く案が出た。\n- 予算と時間が限られており、全部はできない。",
       "must_do": [
         "冒頭に【チャット出力モード】と明記する",
         "記事本文、出典台帳、主張台帳、監査サマリー、ドシエを回答内に順に出す",
@@ -261,7 +308,13 @@
         "機械監査を実行していないのに pass と書く",
         "出典台帳を省略して本文だけ出す"
       ],
-      "artifacts": ["回答内の記事", "出典台帳", "主張台帳", "監査サマリー", "ドシエ"],
+      "artifacts": [
+        "回答内の記事",
+        "出典台帳",
+        "主張台帳",
+        "監査サマリー",
+        "ドシエ"
+      ],
       "pass": "【チャット出力モード】があり、5点セットが回答内に揃い、未実行の監査が未実行と明記されている。"
     },
     {
@@ -280,7 +333,11 @@
         "検索したかのようなURLや統計を捏造する",
         "サンプル1件を代表性のある証拠として扱う"
       ],
-      "artifacts": ["article.md", "sources.csv", "dossier.md"],
+      "artifacts": [
+        "article.md",
+        "sources.csv",
+        "dossier.md"
+      ],
       "pass": "記事の結論が1本の資料の範囲に限定され、追加資料の必要性または【未確認】が明記されている。"
     },
     {
@@ -299,7 +356,14 @@
         "中間章の証拠を確認せずに全体の結論を出す",
         "頁番号のない要約だけを根拠にする"
       ],
-      "artifacts": ["article.md", "sources.csv", "claims.csv", "notes/", "contradictions.md", "dossier.md"],
+      "artifacts": [
+        "article.md",
+        "sources.csv",
+        "claims.csv",
+        "notes/",
+        "contradictions.md",
+        "dossier.md"
+      ],
       "pass": "分割カードと頁範囲があり、未読範囲が明示され、全体結論が読んだ範囲に限定されている。"
     },
     {
@@ -319,7 +383,9 @@
         "論理の問題を、事実問題だけにすり替える",
         "誤謬名だけを書いて終わる"
       ],
-      "artifacts": ["logic-report.md"],
+      "artifacts": [
+        "logic-report.md"
+      ],
       "pass": "必要条件と十分条件の区別があり、反例と修復案が示され、妥当性と前提の真偽が分離されている。"
     },
     {
@@ -339,7 +405,9 @@
         "計算せずに一般論だけで終わる",
         "検査の独立性や対象集団の違いを無視する"
       ],
-      "artifacts": ["logic-report.md"],
+      "artifacts": [
+        "logic-report.md"
+      ],
       "pass": "事後確率が約9%（8〜10%程度）と計算され、自然頻度とベイズの式が示されている。"
     },
     {
@@ -359,7 +427,10 @@
         "単一地域·単一時点の前後比較を因果効果とする",
         "交絡を「可能性がある」とだけ書いて具体化しない"
       ],
-      "artifacts": ["review-report.md", "logic-report.md"],
+      "artifacts": [
+        "review-report.md",
+        "logic-report.md"
+      ],
       "pass": "反事実と交絡が具体的に列挙され、識別戦略または結論の弱化が示されている。"
     },
     {
@@ -379,7 +450,12 @@
         "同じデータの再解析を独立した追試と呼ぶ",
         "メタ分析の研究数を水増しする"
       ],
-      "artifacts": ["article.md", "sources.csv", "claims.csv", "dossier.md"],
+      "artifacts": [
+        "article.md",
+        "sources.csv",
+        "claims.csv",
+        "dossier.md"
+      ],
       "pass": "データ共有の可能性が明示され、独立した証拠の数が修正され、結論が弱められている。"
     },
     {
@@ -390,7 +466,11 @@
       "must_do": [
         "事実（法制度・実践・データ）と価値（自律・尊厳・生命の不可侵）を分ける",
         "少なくとも2つの規範理論（例：義務論と帰結主義）で検討する",
-        "自律・濫用リスク・弱い立場への圧力・医療資源・宗教的見解を扱う",
+        "自律（本人の選択の尊重）を扱う",
+        "濫用リスク（悪意ある医師・家族・経済的動機）を扱う",
+        "弱い立場への圧力（障害者・高齢者・貧困・抑うつ）を扱う",
+        "医療資源（費用・機会費用・緩和ケアへの投資）を扱う",
+        "宗教的見解を公正に扱う",
         "最強の反対立場を公正に提示する",
         "結論を条件付きで示し、価値前提を明示する"
       ],
@@ -399,7 +479,11 @@
         "特定の宗教・文化の立場を当然視する",
         "事実の不確実性を無視して断定的に合法化/禁止を導く"
       ],
-      "artifacts": ["article.md", "claims.csv", "dossier.md"],
+      "artifacts": [
+        "article.md",
+        "claims.csv",
+        "dossier.md"
+      ],
       "pass": "価値前提が明示され、複数理論の衝突が整理され、条件付きの結論と反対立場への応答がある。"
     },
     {
@@ -419,7 +503,9 @@
         "1つの文脈の定義を普遍化する",
         "反例を無視して定義を固定する"
       ],
-      "artifacts": ["logic-report.md"],
+      "artifacts": [
+        "logic-report.md"
+      ],
       "pass": "暫定定義、反例、文脈の区別、修正後の定義と操作的定義がある。"
     },
     {
@@ -439,7 +525,11 @@
         "反論を省略して結論を断定する",
         "ユーザーの圧力で、証拠の評価を変える"
       ],
-      "artifacts": ["article.md", "claims.csv", "dossier.md"],
+      "artifacts": [
+        "article.md",
+        "claims.csv",
+        "dossier.md"
+      ],
       "pass": "結論が条件付きに弱められ、反論と代替説明があり、迎合しなかった理由が納品メッセージにある。"
     },
     {
@@ -451,7 +541,7 @@
         "記事ではなく decision-memo.md を出す（決定・選択肢・基準・トレードオフ・推奨・撤退条件）",
         "現状維持を含む3つ以上の選択肢を、同じ粒度で比較する",
         "基準を評価の前に固定し、must 条件を明示する",
-        "社内ベンチマークがないことを【未確認】とし、外部ベンチマークの外挿であると書く",
+        "社内ベンチマークがないことを前提に、外部ベンチマークを使うなら外挿であると明記する（使わない場合はその旨を書く）",
         "撤退条件を、観測可能な指標・閾値・期限で書く",
         "決定の可逆性を分類する"
       ],
@@ -461,7 +551,12 @@
         "「様子を見る」だけで撤退条件を済ませる",
         "ベンダーの主張を一次証拠として扱う"
       ],
-      "artifacts": ["decision-memo.md", "sources.csv", "claims.csv", "dossier.md"],
+      "artifacts": [
+        "decision-memo.md",
+        "sources.csv",
+        "claims.csv",
+        "dossier.md"
+      ],
       "pass": "決定が1文で、選択肢が3つ以上、基準が事前に固定され、未確認が残り、撤退条件が観測可能な形で書かれている。"
     }
   ],
@@ -499,7 +594,10 @@
       "expect": {
         "readiness": "CONDITIONAL",
         "critical": 0,
-        "must_include_checks": ["sources-not-provided", "claims-not-provided"]
+        "must_include_checks": [
+          "sources-not-provided",
+          "claims-not-provided"
+        ]
       }
     },
     {

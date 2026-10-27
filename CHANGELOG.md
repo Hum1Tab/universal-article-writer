@@ -11,6 +11,16 @@ All notable changes to this project are documented here. The format follows
 - **`decision` mode**: design judgments produce a decision memo (options,
   criteria, trade-offs, recommendation, exit conditions) instead of an article.
   New `references/decision-mode.md`, `assets/decision-memo.md`, and eval `E23`.
+- **`scripts/audit_decision.py`**: a deterministic audit for `decision` memos
+  (decision sentence, options incl. status quo, criteria before evaluation,
+  trade-offs, recommendation, observable exit conditions, reversibility,
+  unknowns), with good/bad fixtures and a `check_repo.py` smoke test.
+- **Trigger-suite checks**: `check_repo.py` validates that both 24-prompt
+  suites have 12 heavy / 12 light prompts and contiguous IDs.
+- **CI consistency self-test**: `selftest_consistency.py` now runs in CI, not
+  just at release time.
+- `scripts/score_trigger.py` and `scripts/selftest_consistency.py` are kept as
+  reusable measurement/test helpers.
 - **`scripts/check_consistency.py`**: compares rule IDs, phases, red-team
   roles, modes, forbidden-pattern IDs, documented case counts, and the
   `SKILL.md` size claim across artifacts; runs `build_universal.py --check`.
@@ -57,6 +67,10 @@ All notable changes to this project are documented here. The format follows
 - The Chinese README's stale diagram (five roles, five gates, missing 2.5/3.5).
 - `references/skill-stack.md` now truthfully describes the body size and the
   single-source rule.
+- Eval specifications aligned with the narrowed scope: E11 is now an
+  evidence-bearing edit (citations and `【未確認】` preserved), E13 includes the
+  memo it refers to, E20's bundled coverage item is split into five items, and
+  E23's benchmark item no longer contradicts its prompt.
 - `UNIVERSAL-PROMPT-LITE.md` carries all 15 rule IDs and the `decision` mode.
 
 ## [3.0.1] — 2026-10-23

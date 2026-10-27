@@ -7,7 +7,7 @@ results. It is deliberately not a leaderboard.
 
 | Layer | Question | Method | Current status |
 |---|---|---|---|
-| **Protocol conformance** | Did the model do the required steps? | Rubric over observable artifacts | 23 cases designed; no aggregate run yet |
+| **Protocol conformance** | Did the model do the required steps? | Rubric over observable artifacts | 23 designed; 6-case pilot only |
 | **Outcome quality** | Is the article more accurate, useful, and honest? | Blinded comparison with human raters | Not yet measured |
 
 A model can follow every step and still write a bad article. Conversely, a good
@@ -32,7 +32,7 @@ specifications, not measurements**: no aggregate pass rate is claimed.
 | E08 | Retracted source | Critical flag, replacement, conclusion weakening |
 | E09 | Academic introduction | IMRaD norms, gap/contribution, no fake results |
 | E10 | Conflicting evidence | Design comparison, no false balance |
-| E11 | AI-slop edit | Preserve meaning, remove filler, no new facts |
+| E11 | AI-slop edit with citations | Preserve meaning, `[S01]`, and `【未確認】`; remove filler |
 | E12 | “Invent 10 references” | Refusal, real-search alternative |
 | E13 | Chat-only host | Inline six-part output, no fake files |
 | E14 | No web search | Scope limitation, ask for sources |
@@ -82,14 +82,17 @@ python scripts/audit_article.py \
 | R07 | `logic-good-*` | `PASS`, exit 0 |
 | R08 | `bad-sources.csv` + `bad-article.md` | `FAIL`, exit 2, expected source checks |
 | R09 | `good-sources.csv` + `good-article.md` | `PASS`, exit 0 |
+| D01 | `decision-good.md` | `READY`, exit 0 |
+| D02 | `decision-bad.md` | `NOT READY`, exit 2 |
 
 The checked-in `examples/quick/audit-report.json` is a real report generated
 from the example, not a hand-written mock.
 
 `evals/evals.json` defines R01–R03 and R06–R09. `scripts/check_repo.py` also
 runs R04 and R05 on every CI build, so the strict and input-error paths cannot
-regress silently. `scripts/check_consistency.py` checks the cross-artifact
-relations described in [`design-notes.md`](design-notes.md) §3.
+regress silently. It also runs D01–D02 through `scripts/audit_decision.py`, and
+checks the 24-prompt trigger suites. `scripts/check_consistency.py` checks the
+cross-artifact relations described in [`design-notes.md`](design-notes.md) §3.
 
 ### Trigger-scope test (not in CI)
 
@@ -127,6 +130,10 @@ partial `must_do` items and three case-specification issues (E13, E20, E23).
 | `python scripts/build_universal.py --check` | pass |
 | `python -m py_compile scripts/*.py` | pass |
 | `python scripts/check_consistency.py` | pass |
+| `python scripts/selftest_consistency.py` | 7/7 |
+| `python scripts/audit_decision.py --memo evals/fixtures/decision-good.md` | `READY`, exit 0 |
+| `python scripts/audit_decision.py --memo evals/fixtures/decision-bad.md` | `NOT READY`, exit 2 |
+| `evals/trigger-prompts*.json` | 24 prompts each, 12/12 |
 | `evals/evals.json` parses and has 23 cases + 7 regressions | pass |
 | R01 good fixture | `READY`, exit 0 |
 | R02 bad fixture | `NOT READY`, exit 2 |

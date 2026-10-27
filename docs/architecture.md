@@ -29,7 +29,7 @@ flowchart LR
 | Resist sycophancy | The user's preferred conclusion is not evidence. |
 | Resist citation theater | Every factual claim needs a source ID or `【未確認】`. |
 | Separate fact, inference, value, and prose | A higher layer cannot override a lower one. |
-| Be auditable | Three deterministic scripts check structure where possible. |
+| Be auditable | Deterministic scripts check structure where possible. |
 | Be consistent | Rule, phase, and role identifiers are cross-checked by `scripts/check_consistency.py` in CI, not only by review. |
 | Stay small | Four engines plus a Japanese editing layer, seven gates, six red-team roles; not an org chart. |
 
@@ -100,7 +100,7 @@ cannot change the lower layer's facts, citations, or uncertainty.
 | 3.5 Normative (conditional) | value-premise note in `dossier.md` | required only for `normative` / `policy` or any normative claim: one-sentence value premise, two frameworks, distribution, worst-off, opposing value, abuse risk / resource allocation / religious and cultural views where relevant, exit condition |
 | 4. Draft | `article-draft.md` | every paragraph has a function; uncertainty is visible |
 | 5. Red team | `review-report.md`, `logic-report.md`, `revision-log.md` | Critical = 0; Major fixed or explicitly acknowledged; G1–G7 pass |
-| 6. Deliver | `article.md`, `dossier.md`, 3 audit JSONs | audits pass, or a named manual fallback |
+| 6. Deliver | `article.md`, `dossier.md`, audit JSONs | audits pass, or a named manual fallback |
 
 **Critical is not averaged away.** A citation fabrication is Critical even if the
 prose is excellent. This is the main difference between a quality checklist and
@@ -190,7 +190,7 @@ between files is a defect that survives review. See
 [`design-notes.md`](design-notes.md) §3 for what the check can and cannot
 guarantee.
 
-## 8. The three audit scripts
+## 8. The audit scripts
 
 ### 8.1 `audit_article.py`
 
@@ -248,6 +248,20 @@ statistical validity, or argument strength. Those remain human work.
 It checks **relations between artifacts**, not the truth of their content. A
 green run means the documents agree with each other, not that the protocol is
 correct.
+
+### 8.5 `audit_decision.py`
+
+- checks a `decision` memo, not an article: a one-sentence decision, at least
+  three options including the status quo, criteria before evaluation,
+  trade-offs, a recommendation, observable exit conditions, reversibility, and
+  visible unknowns
+- treats missing required sections as Critical, and structural weaknesses
+  (too few options, criteria after the evaluation table, unobservable exit
+  conditions) as Major
+- emits `READY` / `CONDITIONAL` / `NOT READY` and exits 2 on Critical (or on
+  Major under `--strict`)
+- does not judge whether the decision is good, whether the evidence is true, or
+  whether the trade-off is acceptable
 
 Exit codes:
 

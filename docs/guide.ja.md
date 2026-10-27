@@ -308,6 +308,16 @@ PowerShell では行末の `\` を `` ` `` に変えてください。
 
 反論の強さ・限界の誠実さ・AI 開示の完全性は判定しません。
 
+### audit_logic_report.py が検査するもの
+
+`logic-report.md` を検査します。
+
+- 結論・前提（`[TEXT]` / `[CONV]` / `[ANALYST]` のタグを含む）・推論の型・反例/代替説明・反証条件・未解決の見出しと本文
+- 荷重主張がある場合、主張IDまたは「荷重主張」への言及
+- `TODO` / `TBD` の残り
+
+推論の妥当性・反例の強さ・反証条件の十分性は判定しません。
+
 ### 終了コード
 
 | コード | 意味 |
@@ -518,6 +528,7 @@ universal-article-writer/
 │   ├── audit_article.py
 │   ├── audit_decision.py        # 決定メモの監査
 │   ├── audit_dossier.py         # ドシエの監査
+│   ├── audit_logic_report.py    # 論理監査メモの監査
 │   ├── argument_lint.py
 │   ├── verify_sources.py
 │   ├── build_universal.py       # UNIVERSAL-PROMPT.md の生成

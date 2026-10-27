@@ -34,7 +34,8 @@ audit punished the first and ignored the second.
 - `unverified-article.md` + `unverified-claims.csv` → `CONDITIONAL`, with
   `unverified-not-disclosed`.
 - `dossier-good.md` → `READY`; `dossier-bad.md` → `NOT READY`.
-- `check_repo.py` → 73/73.
+- `logic-report-good.md` → `READY`; `logic-report-bad.md` → `NOT READY`.
+- `check_repo.py` → 75/75.
 - `check_consistency.py` → 36/36.
 - `selftest_consistency.py` → 7/7.
 
@@ -57,7 +58,25 @@ Fix:
 The check verifies presence and non-emptiness, not whether the objection is
 strong or the limits are honest. Those remain human judgments.
 
-## 5. What this self-audit did not fix
+## 5. Third pass — `logic-report.md` was required but unchecked
+
+`logic-report.md` is the Phase 2.5 artifact, but no script read it either. A
+report could be missing premises, inference types, or falsifiers and still pass.
+
+Fix:
+
+- `scripts/audit_logic_report.py` checks the conclusion, premises (with
+  `[TEXT]`/`[CONV]`/`[ANALYST]` tags), inference type, counterexample or
+  alternative explanation, falsifiers, and open questions.
+- If `--claims` is given, a load-bearing claim must be referenced by ID or by
+  the phrase "荷重主張".
+- `logic-report-good.md` / `logic-report-bad.md` fixtures, wired into
+  `check_repo.py` as D05/D06.
+
+The check verifies structure, not whether the inference is valid or whether the
+falsifier is adequate.
+
+## 6. What this self-audit did not fix
 
 - **Phase order is not verified.** The scripts see final artifacts, not whether
   Phase 1–3 were executed. A model can backfill a clean ledger. The protocol

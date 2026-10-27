@@ -277,6 +277,18 @@ correct.
 - does not judge whether the objection is strong, whether the limits are honest,
   or whether the AI disclosure is complete
 
+### 8.7 `audit_logic_report.py`
+
+- checks `logic-report.md`: conclusion, premises (and `[TEXT]`/`[CONV]`/
+  `[ANALYST]` tags), inference type, counterexample or alternative explanation,
+  falsifiers, and open questions
+- missing conclusion, premises, or falsifiers are Critical; missing inference
+  type, counterexample, or open questions are Major; a thin section is Major
+- if `--claims` is given and there are load-bearing claims, the report must
+  reference a claim ID or "荷重主張"
+- does not judge whether the inference is valid or whether a falsifier is
+  adequate
+
 Exit codes:
 
 | Code | Meaning |

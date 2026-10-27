@@ -18,6 +18,9 @@ All notable changes to this project are documented here. The format follows
 - **`scripts/audit_dossier.py`**: the dossier is now checked for its conclusion,
   strongest objection, limits, unverified items, AI disclosure, and audit
   results, with good/bad fixtures and a `check_repo.py` smoke test (D03/D04).
+- **`scripts/audit_logic_report.py`**: `logic-report.md` is checked for its
+  conclusion, premises, inference type, counterexample, falsifiers, and open
+  questions, with good/bad fixtures (D05/D06).
 - **Trigger-suite checks**: `check_repo.py` validates that both 24-prompt
   suites have 12 heavy / 12 light prompts and contiguous IDs.
 - **CI consistency self-test**: `selftest_consistency.py` now runs in CI, not

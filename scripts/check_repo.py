@@ -122,6 +122,8 @@ REQUIRED_FILES = [
     "evals/fixtures/decision-bad.md",
     "evals/fixtures/unverified-article.md",
     "evals/fixtures/unverified-claims.csv",
+    "evals/fixtures/dossier-good.md",
+    "evals/fixtures/dossier-bad.md",
     "examples/quick/article.md",
     "examples/quick/sources.csv",
     "examples/quick/claims.csv",
@@ -134,6 +136,7 @@ REQUIRED_FILES = [
     "examples/chat-only/transcript.md",
     "scripts/audit_article.py",
     "scripts/audit_decision.py",
+    "scripts/audit_dossier.py",
     "scripts/argument_lint.py",
     "scripts/verify_sources.py",
     "scripts/build_universal.py",
@@ -823,6 +826,45 @@ def check_decision_audit() -> None:
             R.fail("decision-bad fixture failed", short_output(proc))
 
 
+def check_dossier_audit() -> None:
+    print("\n== Dossier audit ==")
+    script = ROOT / "scripts" / "audit_dossier.py"
+    if not script.is_file():
+        R.skip("audit_dossier.py is missing")
+        return
+
+    with check_tmpdir() as tmp:
+        out = tmp / "dossier-good.json"
+        proc, data = run_tool(
+            "audit_dossier.py",
+            ["--dossier", "evals/fixtures/dossier-good.md"],
+            out,
+        )
+        if proc.returncode == 0 and data:
+            summary = data.get("summary", {})
+            if summary.get("readiness") == "READY" and summary.get("critical") == 0:
+                R.ok("dossier-good fixture -> READY, exit 0")
+            else:
+                R.fail("dossier-good fixture must be READY", json.dumps(summary, ensure_ascii=False))
+        else:
+            R.fail("dossier-good fixture failed", short_output(proc))
+
+        out = tmp / "dossier-bad.json"
+        proc, data = run_tool(
+            "audit_dossier.py",
+            ["--dossier", "evals/fixtures/dossier-bad.md"],
+            out,
+        )
+        if proc.returncode == 2 and data:
+            summary = data.get("summary", {})
+            if summary.get("readiness") == "NOT READY" and int(summary.get("critical", 0)) >= 2:
+                R.ok("dossier-bad fixture -> NOT READY, exit 2")
+            else:
+                R.fail("dossier-bad fixture must be NOT READY", json.dumps(summary, ensure_ascii=False))
+        else:
+            R.fail("dossier-bad fixture failed", short_output(proc))
+
+
 def check_disclosure_test() -> None:
     print("\n== Unverified disclosure ==")
     script = ROOT / "scripts" / "audit_article.py"
@@ -1161,6 +1203,7 @@ def main() -> int:
     check_old_id()
     check_placeholders()
     check_decision_audit()
+    check_dossier_audit()
     check_disclosure_test()
     check_audit_regressions()
     check_examples()

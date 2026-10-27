@@ -33,11 +33,31 @@ audit punished the first and ignored the second.
 - `R04` major fixture + `--strict` → `CONDITIONAL`, exit 2.
 - `unverified-article.md` + `unverified-claims.csv` → `CONDITIONAL`, with
   `unverified-not-disclosed`.
-- `check_repo.py` → 71/71.
+- `dossier-good.md` → `READY`; `dossier-bad.md` → `NOT READY`.
+- `check_repo.py` → 73/73.
 - `check_consistency.py` → 36/36.
 - `selftest_consistency.py` → 7/7.
 
-## 4. What this self-audit did not fix
+## 4. Second pass — the dossier was required but unchecked
+
+`dossier.md` is part of the output contract, but `audit_article.py` never reads
+it, and `check_repo.py` only checked the quick example. A hollow dossier could
+still ship with a `READY` article. This is the same gap as the decision memo
+before `audit_decision.py`.
+
+Fix:
+
+- `scripts/audit_dossier.py` checks the conclusion, strongest objection, limits,
+  unverified items, AI disclosure, and audit results; missing conclusion /
+  objection / limits are Critical, the other sections are Major, an empty
+  section is Major, and `TODO`/`TBD` is Minor.
+- `dossier-good.md` / `dossier-bad.md` fixtures, wired into `check_repo.py` as
+  D03/D04.
+
+The check verifies presence and non-emptiness, not whether the objection is
+strong or the limits are honest. Those remain human judgments.
+
+## 5. What this self-audit did not fix
 
 - **Phase order is not verified.** The scripts see final artifacts, not whether
   Phase 1–3 were executed. A model can backfill a clean ledger. The protocol

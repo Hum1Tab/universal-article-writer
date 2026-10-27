@@ -298,6 +298,16 @@ PowerShell では行末の `\` を `` ` `` に変えてください。
 
 意味内容・証拠の真偽・トレードオフの妥当性は判定しません。
 
+### audit_dossier.py が検査するもの
+
+`dossier.md`（人に読ませる要約）を検査します。
+
+- 結論・最強の反論・限界・未確認・AI 開示・監査結果の見出しと本文
+- 各節が空でないか
+- `TODO` / `TBD` の残り
+
+反論の強さ・限界の誠実さ・AI 開示の完全性は判定しません。
+
 ### 終了コード
 
 | コード | 意味 |
@@ -507,6 +517,7 @@ universal-article-writer/
 ├── scripts/
 │   ├── audit_article.py
 │   ├── audit_decision.py        # 決定メモの監査
+│   ├── audit_dossier.py         # ドシエの監査
 │   ├── argument_lint.py
 │   ├── verify_sources.py
 │   ├── build_universal.py       # UNIVERSAL-PROMPT.md の生成

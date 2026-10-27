@@ -305,6 +305,7 @@ G7 は `normative`/`policy` と Phase 3.5 で必須。他のモードでも規�
 | `assets/dossier-template.md` | Phase 6。証拠ドシエ。 |
 | `scripts/audit_article.py` | Phase 6。記事・引用・主張の機械監査。 |
 | `scripts/audit_decision.py` | `decision`。決定メモの選択肢・基準・撤退条件の機械監査。 |
+| `scripts/audit_dossier.py` | Phase 6。ドシエの結論・反論・限界・未確認・AI 開示・監査結果の機械監査。 |
 | `scripts/argument_lint.py` | Phase 2.5, 5。推論の飛躍・誤謬・構造の機械監査。 |
 | `scripts/verify_sources.py` | Phase 1, 6。書誌形式・重複・DOI/URL・撤回の機械監査。 |
 

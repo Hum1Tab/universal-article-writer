@@ -84,6 +84,8 @@ python scripts/audit_article.py \
 | R09 | `good-sources.csv` + `good-article.md` | `PASS`, exit 0 |
 | D01 | `decision-good.md` | `READY`, exit 0 |
 | D02 | `decision-bad.md` | `NOT READY`, exit 2 |
+| D03 | `dossier-good.md` | `READY`, exit 0 |
+| D04 | `dossier-bad.md` | `NOT READY`, exit 2 |
 
 The checked-in `examples/quick/audit-report.json` is a real report generated
 from the example, not a hand-written mock.
@@ -133,6 +135,8 @@ partial `must_do` items and three case-specification issues (E13, E20, E23).
 | `python scripts/selftest_consistency.py` | 7/7 |
 | `python scripts/audit_decision.py --memo evals/fixtures/decision-good.md` | `READY`, exit 0 |
 | `python scripts/audit_decision.py --memo evals/fixtures/decision-bad.md` | `NOT READY`, exit 2 |
+| `python scripts/audit_dossier.py --dossier evals/fixtures/dossier-good.md` | `READY`, exit 0 |
+| `python scripts/audit_dossier.py --dossier evals/fixtures/dossier-bad.md` | `NOT READY`, exit 2 |
 | unverified claim without a marker | `CONDITIONAL`, flagged |
 | `evals/trigger-prompts*.json` | 24 prompts each, 12/12 |
 | `evals/evals.json` parses and has 23 cases + 7 regressions | pass |

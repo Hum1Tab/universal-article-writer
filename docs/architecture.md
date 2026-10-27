@@ -266,6 +266,17 @@ correct.
 - does not judge whether the decision is good, whether the evidence is true, or
   whether the trade-off is acceptable
 
+### 8.6 `audit_dossier.py`
+
+- checks the human-facing `dossier.md`: conclusion, strongest objection, limits,
+  unverified items, AI disclosure, and audit results
+- missing conclusion/objection/limits are Critical; missing unverified/disclosure/
+  audit sections are Major; a section with almost no body is Major
+- emits `READY` / `CONDITIONAL` / `NOT READY` and exits 2 on Critical (or on
+  Major under `--strict`)
+- does not judge whether the objection is strong, whether the limits are honest,
+  or whether the AI disclosure is complete
+
 Exit codes:
 
 | Code | Meaning |

@@ -15,6 +15,9 @@ All notable changes to this project are documented here. The format follows
   (decision sentence, options incl. status quo, criteria before evaluation,
   trade-offs, recommendation, observable exit conditions, reversibility,
   unknowns), with good/bad fixtures and a `check_repo.py` smoke test.
+- **`scripts/audit_dossier.py`**: the dossier is now checked for its conclusion,
+  strongest objection, limits, unverified items, AI disclosure, and audit
+  results, with good/bad fixtures and a `check_repo.py` smoke test (D03/D04).
 - **Trigger-suite checks**: `check_repo.py` validates that both 24-prompt
   suites have 12 heavy / 12 light prompts and contiguous IDs.
 - **CI consistency self-test**: `selftest_consistency.py` now runs in CI, not

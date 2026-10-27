@@ -92,6 +92,7 @@ REQUIRED_FILES = [
     "docs/design-notes.md",
     "docs/verification-2026-10-28.md",
     "docs/pilot-eval-2026-10-28.md",
+    "docs/self-audit-2026-10-28.md",
     "docs/faq.md",
     "docs/launch.md",
     "docs/guide.ja.md",
@@ -119,6 +120,8 @@ REQUIRED_FILES = [
     "evals/fixtures/logic-bad-sources.csv",
     "evals/fixtures/decision-good.md",
     "evals/fixtures/decision-bad.md",
+    "evals/fixtures/unverified-article.md",
+    "evals/fixtures/unverified-claims.csv",
     "examples/quick/article.md",
     "examples/quick/sources.csv",
     "examples/quick/claims.csv",
@@ -820,6 +823,44 @@ def check_decision_audit() -> None:
             R.fail("decision-bad fixture failed", short_output(proc))
 
 
+def check_disclosure_test() -> None:
+    print("\n== Unverified disclosure ==")
+    script = ROOT / "scripts" / "audit_article.py"
+    if not script.is_file():
+        R.skip("audit_article.py is missing")
+        return
+
+    with check_tmpdir() as tmp:
+        out = tmp / "unverified.json"
+        proc, data = run_audit(
+            [
+                "--article",
+                "evals/fixtures/unverified-article.md",
+                "--sources",
+                "evals/fixtures/good-sources.csv",
+                "--claims",
+                "evals/fixtures/unverified-claims.csv",
+            ],
+            out,
+        )
+        if proc.returncode == 0 and data:
+            summary = data.get("summary", {})
+            checks = {finding.get("check") for finding in data.get("findings", [])}
+            if (
+                summary.get("readiness") == "CONDITIONAL"
+                and int(summary.get("major", 0)) >= 1
+                and "unverified-not-disclosed" in checks
+            ):
+                R.ok("unverified claim without a marker -> CONDITIONAL, flagged")
+            else:
+                R.fail(
+                    "unverified claim must be flagged when no marker is present",
+                    json.dumps(summary, ensure_ascii=False),
+                )
+        else:
+            R.fail("unverified disclosure fixture failed", short_output(proc))
+
+
 def check_audit_regressions() -> None:
     print("\n== Audit regressions ==")
     script = ROOT / "scripts" / "audit_article.py"
@@ -1120,6 +1161,7 @@ def main() -> int:
     check_old_id()
     check_placeholders()
     check_decision_audit()
+    check_disclosure_test()
     check_audit_regressions()
     check_examples()
 

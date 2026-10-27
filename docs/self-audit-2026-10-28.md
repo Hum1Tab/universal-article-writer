@@ -1,0 +1,53 @@
+# Self-audit — 2026-10-28
+
+This note applies the protocol's own gates to the protocol's audit rules. The
+target is not an article; it is the question **"does each deterministic check
+enforce the rule it claims to enforce?"**
+
+## 1. Method
+
+- Take `R01–R15` and `G0–G7` as the specification.
+- For each check in `scripts/audit_article.py`, compare its severity with the
+  rule it claims to test.
+- Falsify with fixtures: a check that cannot make a case `NOT READY` for a
+  Critical rule is not enforcing that rule.
+- Fix the rule or the severity, then re-run `check_repo.py`.
+
+## 2. Findings
+
+| Finding | Why it matters | Fix |
+|---|---|---|
+| A disclosed `【未確認】` was **Major** | R02 requires the marker when a fact is unconfirmed. Penalizing it rewards hiding and forces `CONDITIONAL` on honest work. | Marker is now **Minor**. A claim with `status=unverified` and **no** marker is **Major** (`unverified-not-disclosed`). |
+| A missing counterargument was **Minor** | R04 and G4 require the strongest objection. An article could be `READY` without one. | `counterargument-missing` is now **Major**. |
+| `major-article.md` only produced a Major through the old `【未確認】` severity | After the fix, R04 (`--strict`) stopped testing the strict path. | The fixture now omits the counterargument, so R04 still exits 2. |
+| The docs said "flags unresolved `【未確認】`" without saying the severity | A reader could not predict whether an honest marker makes a report `CONDITIONAL`. | `docs/architecture.md` §8.1 now states the severity and the new check. |
+
+The first two are the substantive ones. Both were **perverse incentives**: the
+rule said "disclose uncertainty" and "write the strongest objection", while the
+audit punished the first and ignored the second.
+
+## 3. Verification
+
+- `R01` good fixture → `READY`, exit 0.
+- `R02` bad fixture → `NOT READY`, exit 2, expected checks present.
+- `R04` major fixture + `--strict` → `CONDITIONAL`, exit 2.
+- `unverified-article.md` + `unverified-claims.csv` → `CONDITIONAL`, with
+  `unverified-not-disclosed`.
+- `check_repo.py` → 71/71.
+- `check_consistency.py` → 36/36.
+- `selftest_consistency.py` → 7/7.
+
+## 4. What this self-audit did not fix
+
+- **Phase order is not verified.** The scripts see final artifacts, not whether
+  Phase 1–3 were executed. A model can backfill a clean ledger. The protocol
+  says the audit checks structure, not process; this remains a limit.
+- **`partial` sources are still Minor.** A load-bearing claim supported only by
+  an abstract-level source is allowed. The example is deliberately `READY` with
+  three partial sources, so changing this would require re-rating the example.
+- **`G5` prose quality is not machine-checked.** "One paragraph, one job" and
+  "the promise is collected" remain human judgments.
+- **Concession Threshold is still self-scored.** The rubric reduces
+  arbitrariness, not the correlation between author and scorer.
+
+These are recorded as limits, not silently fixed.

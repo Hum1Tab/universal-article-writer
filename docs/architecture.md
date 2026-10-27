@@ -201,7 +201,10 @@ guarantee.
 - flags normative claims without a warrant, causal claims backed only by
   cross-sectional evidence, and duplicate DOIs
 - flags direct quotations without a locator
-- flags unresolved `【未確認】`, `TODO`, `TBD`
+- treats a disclosed `【未確認】` as Minor, but flags unverified claims with no
+  disclosure marker as Major
+- flags a missing counterargument as Major (G4)
+- flags `TODO`, `TBD`, and other placeholders
 - flags overclaiming and a small set of AI-slop phrases
 - emits a JSON report with `READY`, `CONDITIONAL`, or `NOT READY`
 

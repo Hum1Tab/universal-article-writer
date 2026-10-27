@@ -48,6 +48,11 @@ All notable changes to this project are documented here. The format follows
   judgment, and must be scored in a pass separate from drafting.
 - **Red-team independence stated honestly**: six roles cover different error
   types; sequential role-play by one model is recorded as non-independent.
+- **Audit severity aligned with the gates**: a missing counterargument is now
+  Major (G4), a disclosed `【未確認】` is Minor (honest uncertainty is not a
+  defect), and an unverified claim with no disclosure marker is Major. The
+  `major-article.md` fixture now omits the counterargument so R04 still
+  exercises `--strict`, and a new fixture covers the disclosure check.
 - **Phase 3.5 and G7 expanded** (when applicable) to require abuse risk,
   resource allocation, and religious/cultural views. Surfaced by the pilot
   eval of E20, where the normative article passed but covered these thinly.

@@ -1,0 +1,2 @@
+claim_id,section,claim,claim_type,evidence_ids,locator,warrant,confidence,counterevidence,status,load_bearing,falsifier
+C01,1,在宅勤務は知識労働者の生産性を高める,descriptive,S01,abstract,単一の観察研究の報告であり、因果は支持しない,low,選択効果と逆因果の可能性,unverified,yes,無作為化試験で効果が確認されない場合

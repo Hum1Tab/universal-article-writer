@@ -133,6 +133,7 @@ partial `must_do` items and three case-specification issues (E13, E20, E23).
 | `python scripts/selftest_consistency.py` | 7/7 |
 | `python scripts/audit_decision.py --memo evals/fixtures/decision-good.md` | `READY`, exit 0 |
 | `python scripts/audit_decision.py --memo evals/fixtures/decision-bad.md` | `NOT READY`, exit 2 |
+| unverified claim without a marker | `CONDITIONAL`, flagged |
 | `evals/trigger-prompts*.json` | 24 prompts each, 12/12 |
 | `evals/evals.json` parses and has 23 cases + 7 regressions | pass |
 | R01 good fixture | `READY`, exit 0 |

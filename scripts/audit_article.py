@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 audit_article.py — 論理記事工房の機械監査スクリプト
@@ -912,7 +912,7 @@ class Auditor:
         if not COUNTERARGUMENT_PATTERN.search(self.text):
             self.add(
                 "counterargument-missing",
-                "minor",
+                "major",
                 "G4",
                 "反論・反対意見への言及が見つからない。最強の反論を1節設ける。",
             )
@@ -928,10 +928,26 @@ class Auditor:
         for match in re.finditer(r"【未確認[^】]*】", self.text):
             self.add(
                 "unresolved-unverified",
+                "minor",
+                "G5",
+                "未確認マーカーが残っている（開示済み）: {}".format(match.group(0)),
+                line=line_of(self.text, match.start()),
+            )
+
+        # A disclosed marker is honest; silence is the defect.
+        unverified_claims = [
+            claim_id
+            for claim_id, row in self.claims.items()
+            if row.get("status", "").strip().lower() == "unverified"
+        ]
+        if unverified_claims and not re.search(r"【未確認[^】]*】", self.text):
+            self.add(
+                "unverified-not-disclosed",
                 "major",
                 "G5",
-                "未確認マーカーが残っている: {}".format(match.group(0)),
-                line=line_of(self.text, match.start()),
+                "claims.csv に unverified の主張があるが、本文に【未確認】がない: {}".format(
+                    ", ".join(sorted(unverified_claims))
+                ),
             )
         for pattern, label in [
             (r"\bTODO\b", "TODO"),

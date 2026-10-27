@@ -319,6 +319,11 @@ applies here, and the checker's docstring repeats it.
 | Concession Threshold rubric | Score depends on public predicates | `references/adversarial-review.md` §5 |
 | `UNIVERSAL-PROMPT.md` generated | No drift between skill and prompt | `build_universal.py --check` |
 
+A self-audit of the audit severities (the protocol applied to its own checks) is
+in [`self-audit-2026-10-28.md`](self-audit-2026-10-28.md). It found two perverse
+incentives: a disclosed `【未確認】` was Major, and a missing counterargument was
+Minor. Both are fixed.
+
 ---
 
 ## 5. What would falsify this design

@@ -34,10 +34,10 @@ The current READMEs are structured for this. Keep them in sync.
 
 ## 3. Release
 
-Create a GitHub release `v3.0.1` with:
+Create a GitHub release `v3.1.0` with:
 
-- title: `v3.0.1 — Japanese Editing Edition`
-- short summary: any AI, seven phases, 4 engines + Japanese editing, 7 gates, 3 audits, 22 evals
+- title: `v3.1.0 — Scope, decision mode, and checked consistency`
+- short summary: any AI, phases 0–6, 4 engines + Japanese editing, 7 gates, 3 audits, 23 evals
 - link to `CHANGELOG.md`
 - attach `UNIVERSAL-PROMPT.md` and `UNIVERSAL-PROMPT-LITE.md` as release assets
 - note the known limitations and the manual-audit fallback
@@ -64,7 +64,7 @@ Tailor each post. Do not paste the same announcement everywhere.
 > delivery. It works in chat, API, and coding-agent hosts, with explicit fallbacks
 > when files/search/code are unavailable.
 >
-> The repo includes standard-library audit scripts, 22 behavioral eval cases,
+> The repo includes standard-library audit scripts, 23 behavioral eval cases,
 > examples, and an honest evidence page that separates research findings from
 > design claims. I'd especially value feedback on the eval design and on hosts
 > where the protocol breaks.
@@ -95,7 +95,7 @@ Zenn / Qiita / note:
 > GPT-4でも参考文献の18%が捏造だったという研究があります。このリポジトリは、
 > 出典台帳・主張台帳・論証マップ・赤チーム監査・引用監査を組み合わせた、
 > どのAIでも使える記事執筆プロトコルです。プロンプト集ではなく、検証可能な
-> 仕組みとして設計しました。22の評価ケースと、依存なしの監査スクリプト3本を同梱
+> 仕組みとして設計しました。23の評価ケースと、依存なしの監査スクリプト3本を同梱
 > しています。
 
 ### Chinese

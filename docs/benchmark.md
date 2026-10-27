@@ -7,7 +7,7 @@ results. It is deliberately not a leaderboard.
 
 | Layer | Question | Method | Current status |
 |---|---|---|---|
-| **Protocol conformance** | Did the model do the required steps? | Rubric over observable artifacts | 22 cases specified; manual runs only |
+| **Protocol conformance** | Did the model do the required steps? | Rubric over observable artifacts | 23 cases designed; no aggregate run yet |
 | **Outcome quality** | Is the article more accurate, useful, and honest? | Blinded comparison with human raters | Not yet measured |
 
 A model can follow every step and still write a bad article. Conversely, a good
@@ -16,8 +16,9 @@ article can violate the protocol. Keeping the two layers separate prevents
 
 ## Behavioral cases
 
-`evals/evals.json` contains 22 cases. Each has a prompt, `must_do`,
-`must_not_do`, expected artifacts, and one pass condition.
+`evals/evals.json` contains 23 cases. Each has a prompt, `must_do`,
+`must_not_do`, expected artifacts, and one pass condition. **These are
+specifications, not measurements**: no aggregate pass rate is claimed.
 
 | ID | Case | What it probes |
 |---|---|---|
@@ -43,6 +44,7 @@ article can violate the protocol. Keeping the two layers separate prevents
 | E20 | Normative argument (euthanasia) | Value premises, multiple frameworks |
 | E21 | Conceptual analysis (“fairness”) | Necessary conditions, counterexamples |
 | E22 | Pressure to confirm a thesis | Sycophancy resistance, consistency |
+| E23 | Design decision memo (`decision`) | Options, criteria, trade-offs, falsifier; no article shell |
 
 ### Scoring
 
@@ -86,9 +88,37 @@ from the example, not a hand-written mock.
 
 `evals/evals.json` defines R01–R03 and R06–R09. `scripts/check_repo.py` also
 runs R04 and R05 on every CI build, so the strict and input-error paths cannot
-regress silently.
+regress silently. `scripts/check_consistency.py` checks the cross-artifact
+relations described in [`design-notes.md`](design-notes.md) §3.
 
-## Current results (2026-10-22)
+### Trigger-scope test (not in CI)
+
+`evals/trigger-prompts.json` contains 24 requests: 12 that need evidence
+discipline (heavy) and 12 that do not (light). To compare two descriptions:
+
+1. In a separate session, give a router the description and the 24 requests,
+   and ask for LOAD/SKIP only.
+2. Save the decisions as JSON and score them:
+
+```bash
+python scripts/score_trigger.py decisions.json
+```
+
+The score is a property of that router on that prompt set, not of the skill in
+general. The prompt set is small and was authored for this comparison, so treat
+the result as a smoke test, not a benchmark.
+
+A first small-N verification of the v3.1 changes (trigger scope, reference
+fallback, A/B conformance, checker mutation) is documented in
+[`verification-2026-10-28.md`](verification-2026-10-28.md). It reports no
+structural regression in one task, but it is not an outcome-quality study.
+
+A six-case pilot of the behavioral suite (E02, E05, E13, E16, E20, E23), with a
+blind judge, is documented in
+[`pilot-eval-2026-10-28.md`](pilot-eval-2026-10-28.md). All six passed, with two
+partial `must_do` items and three case-specification issues (E13, E20, E23).
+
+## Current results (2026-10-28)
 
 ### Deterministic checks
 
@@ -96,7 +126,8 @@ regress silently.
 |---|---|
 | `python scripts/build_universal.py --check` | pass |
 | `python -m py_compile scripts/*.py` | pass |
-| `evals/evals.json` parses and has 22 cases + 7 regressions | pass |
+| `python scripts/check_consistency.py` | pass |
+| `evals/evals.json` parses and has 23 cases + 7 regressions | pass |
 | R01 good fixture | `READY`, exit 0 |
 | R02 bad fixture | `NOT READY`, exit 2 |
 | R03 no ledgers | `CONDITIONAL`, exit 0 |

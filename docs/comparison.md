@@ -93,6 +93,8 @@ That is a different product from “here is a 2,000-word article.”
 Use a simpler approach when:
 
 - the task is a short personal reflection with no factual claims
+- the request is a light copy-edit (tone, headings, flow) with no factual or
+  argumentative stakes
 - the output is fiction, poetry, or brand copy where evidence is not the point
 - you need a quick brainstorm, not a defensible argument
 - the source base is one document and the claim is a direct summary

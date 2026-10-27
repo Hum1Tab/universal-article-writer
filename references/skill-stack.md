@@ -8,11 +8,13 @@
 
 ## 1. 設計方針
 
-1. **単体で動く。** 既存スキルがなくても、7フェーズと内蔵リファレンスで完結する。
+1. **単体で動く。** 既存スキルがなくても、フェーズ 0–6（2.5 と 3.5 を含む）と内蔵リファレンスで完結する。
 2. **既存スキルがあれば専門家として呼ぶ。** ただし、呼び出しに失敗しても止まらない。
 3. **構造を借り、文言は借りない。** ワークフロー、ゲート、失敗様式、評価観点を参考にする。
 4. **監査可能性を最優先する。** 主張、証拠、推論、反論、引用状態をファイルに残す。
 5. **過剰な自動化をしない。** 最終判断は人間に残す。AI が書いたことを隠さない。
+6. **正本を1つにする。** 規則・フェーズ・役割・モードの本文は `SKILL.md` に置き、他は ID で参照する。
+   呼び出し表（このファイル）と生成プロンプトだけが例外で、生成物は CI が同期を検査する。
 
 ---
 
@@ -34,7 +36,7 @@
 | `writing-beats` | 同上 | 要確認 | 段落のリズム、1段落1仕事、場面の切り替え | Phase 4 |
 | `writing-fragments` | 同上 | 要確認 | 断片から構成を組む、書く前に素材を並べる | Phase 3、Phase 4 |
 | `brainstorming` | obra/superpowers | 要確認 | 発散→収束、前提を疑う、選択肢を広げる | Phase 0、Phase 3 |
-| `verification-before-completion` | 同上 | 要確認 | 証拠なき完了宣言の禁止、完了前の検証 | Phase 6、`SKILL.md` §10 |
+| `verification-before-completion` | 同上 | 要確認 | 証拠なき完了宣言の禁止、完了前の検証 | Phase 6、`SKILL.md` §9 |
 | `skill-creator` | anthropics/skills | 一部 source-available | スキルの構造、description の最適化、評価の設計 | スキル設計、`evals/evals.json` |
 | `deep-research` | timpara/opencode-academic-research（ARS） | CC-BY-NC 4.0 | 多段の調査、検索ログ、反証探索、引用検証 | Phase 1、`research-protocol.md` |
 | `academic-paper` | 同上 | CC-BY-NC 4.0 | 学術論文の構成、引用スタイル、投稿前チェック | `academic` モード、`citation-and-provenance.md` |
@@ -49,6 +51,45 @@
 | `yomiyasu` | nanaism/yomiyasu | MIT | 日本語の7原則、意味保持、主述・比喩・擬人化・文長・読点 | Phase 4.2、`japanese-editing.md` |
 
 **「要確認」のライセンス**：設計時にリポジトリの LICENSE を確認しきれなかったもの。再配布する場合は、必ず各リポジトリの LICENSE を確認すること。本スキルは、これらのスキルの文章をコピーしていないため、アイデアの参照として扱っている。
+
+### 2.1 呼び出し表
+
+ホストにこれらのスキルがある場合だけ、専門家として呼ぶ。**なくても止まらない**（本文と参照ファイルに同等の手順を内蔵している）。呼び出し名・ライセンスは変わりうるので、実行時に存在を確認する。
+
+| 既存スキル | 呼ぶ Phase | 借りるもの |
+|---|---|---|
+| `literature-review` | 1 | 系統的検索、スクリーニング、PRISMA、テーマ統合 |
+| `research` | 1 | 一次資料への遡り、引用付きリサーチノート |
+| `scientific-critical-thinking` | 2, 5 | 研究デザイン、バイアス、GRADE/RoB、統計批判 |
+| `hypothesis-generation` | 3 | 主張タイプ、代替説明、反証条件、予測 |
+| `scientific-writing` | 4, 6 | 証拠との結び付け、不確実性、盗用・捏造防止 |
+| `doc-coauthoring` | 4 | 文脈収集、セクション単位の改善、読者テスト |
+| `better-writing` | 4, 6 | 声のダイヤル、サンプル校正、保存チェック、クラスタ型 slop 監査 |
+| `yomiyasu` | 4, 6 | 日本語の主述・比喩・擬人化・前置き・文長・読点の推敲、意味保持の検査 |
+| `brand-guidelines` | 4 | 声・トーンの一貫性、ブランド表現 |
+| `internal-comms` | 4 | 読者・目的・媒体に合う形式 |
+| `creative-writing-skills` | 4 | 場面、緊張、ペース、視点（ノンフィクションの範囲で） |
+| `academic-paper-skills` | 3, 4 | CARS、IMRaD、貢献、限界、投稿前チェック |
+| `econ-writing-skill` | 3, 4 | 経済学の論証構成、識別戦略の書き方 |
+| `writing-for-agents` | 設計時 | 情報階層、コンテキストポインタ、完了条件 |
+| `citation-management` | 1, 5 | DOI/PMID/arXiv のメタデータ検証、BibTeX |
+| `peer-review` | 5 | 査読形式の批判、Major/Minor の分類 |
+| `scholar-evaluation` | 5 | 根拠に基づく評価、スコアの誤用防止 |
+| `consciousness-council` | 5 | 多視点の赤チーム、フレーム批判 |
+| `grilling` / `grill-me` | 0 | 問いと読者の深掘り |
+| `writing-shape` / `writing-beats` | 4 | 概念のグラウンディング、段落の順序 |
+| `verification-before-completion` | 6 | 証拠なき完了宣言の禁止 |
+| `academic-paper` / `deep-research` | 1–6 | 大規模な学術パイプライン（任意） |
+| `skill-creator` | 設計時 | スキルの構造、評価、記述の最適化 |
+| `argument-analyst` / `fallacy-detector` / `formal-logic-solver` | 2.5, 5 | 標準形、隠れた前提、24+の誤謬、真理表・証明 |
+| `logic-audit` | 5 | 13+の誤謬、証拠等級 E0–E5、重大度の校正 |
+| `dia-warrant` / `dia-reductio` / `dia-negative` / `dia-conjecture` / `dia-counterplan` | 2.5, 3, 5 | Toulmin + Walton の批判的質問、背理法、内在的批判、反例、反計画 |
+| `skills-for-humanity` (`s4h`) | 0, 2.5, 3, 5 | 確率較正、認識論的地位、三角測量、倫理評議会、システム思考 |
+| `meta-analysis-skill` | 1, 2 | PRISMA 2020、GRADE、AMSTAR 2、二重スクリーニング、来歴ゲート |
+| `thinking-methods` | 0, 3 | 方法の選択、意思決定、トレードオフ、事前検死 |
+| `scientific-agent-skills` | 1, 2 | 証拠に紐づく執筆、分野別の方法論、来歴 |
+
+**組み合わせ方は「積み重ね」ではなく「層」**：証拠層 → 統合層 → 推論層 → 価値層 → 構造層 → 段落層 → 声層 → 媒体層 → 完了層。上位層は下位層を上書きしない。特に、声や読みやすさは、事実・引用・不確実性・反論・価値前提を変更できない。
 
 ---
 
@@ -96,7 +137,9 @@ timpara/opencode-academic-research は、Cheng-I Wu による academic-research-
 ### 3.5 anthropics/skills
 
 - **skill-creator**：SKILL.md の構造、description の書き方、評価の設計。
-- 本スキルでは、description にトリガー語を入れ、500行以下の本体と、必要時に読む references に分けた。
+- 本スキルでは、description に「使う仕事」を明示し、500行以下の本体（v3.1 では約360行）に保ち、
+  必要時に読む `references/` に詳細を分けた。規則・フェーズ・役割の本文は本体に置き、
+  他文書は ID で参照する（`scripts/check_consistency.py` が検査する）。
 
 ---
 
@@ -217,7 +260,9 @@ timpara/opencode-academic-research は、Cheng-I Wu による academic-research-
 11. **推論の型と価値層の分離**：事実・推論・価値・表現を層に分け、上位層が下位層を上書きしない。
 12. **証拠の独立性の明示**：論文数ではなく、独立した研究・データセットを数える。
 13. **7ゲート**：G7（価値・規範）を追加し、倫理・政策の記事でも監査できる。
-14. **22の行動評価と7つのスクリプト回帰**：論理・確率・因果・統合・規範・概念・迎合耐性を回帰テストする。
+14. **23の行動評価と7つのスクリプト回帰**：論理・確率・因果・統合・規範・概念・迎合耐性・設計判断を回帰テストする。
+15. **横断的な一貫性検査**：規則ID・フェーズ・役割・モード・件数を `check_consistency.py` が比較する。
+16. **`decision` モード**：設計判断を記事ではなく決定メモ（選択肢・基準・トレードオフ・撤退条件）にする。
 
 ---
 

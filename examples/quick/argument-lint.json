@@ -1,7 +1,7 @@
 {
   "tool": "argument_lint.py",
-  "version": "3.0.1",
-  "generated_at": "2026-10-22T15:22:52.168723+00:00",
+  "version": "3.1.0",
+  "generated_at": "2026-10-27T16:13:55.650159+00:00",
   "inputs": {
     "article": "examples/quick/article.md",
     "claims": "examples/quick/claims.csv",

@@ -117,7 +117,7 @@ cp -R universal-article-writer .agents/skills/
 
 ---
 
-## 5. 7つのフェーズ
+## 5. フェーズ 0–6（2.5 と 3.5 を含む）
 
 | Phase | やること | 主な出力 | ゲート |
 |---|---|---|---|
@@ -126,6 +126,7 @@ cp -R universal-article-writer .agents/skills/
 | **2 評価** | デザイン・バイアス・統計・因果を評価し、主張を抽出 | `claims.csv`, `contradictions.md` | 主張に証拠IDがある。弱い証拠を強いと書いていない |
 | **2.5 推論** | 推論の型・隠れた前提・反例・反証条件を点検 | `logic-report.md` | 各荷重主張に型・Warrant・反証条件がある |
 | **3 設計** | 結論を1文にし、Toulmin と反論とフレーム批判を組む | `argument-map.md`, `outline.md` | 最強の反論がある。各節に仕事がある |
+| **3.5 規範**（条件付き） | 価値前提・分配・反対価値を点検（`normative`/`policy`） | `dossier.md` の価値前提 | 価値前提1文、理論2つ以上、分配、反対価値、濫用・資源配分・宗教/文化（該当時） |
 | **4 執筆** | CEAL で段落を書き、概念を接地させる | `article-draft.md` | 全段落に仕事がある。未確認が明示されている |
 | **5 監査** | 下書きを凍結し、7ゲート・6役割・3監査 | `review-report.md`, `logic-report.md`, `revision-log.md` | Critical 0。Major は修正済みか理由付き |
 | **6 納品** | 修正し、3監査を通し、ドシエを付ける | `article.md`, `dossier.md`, `audit-report.json` ほか | 監査 pass。確認したこと／していないことを説明 |
@@ -144,8 +145,11 @@ cp -R universal-article-writer .agents/skills/
 | `policy` | 政策提言、制度設計 | 出典10件＋実施根拠 |
 | `review` | 既存原稿の論理監査 | 対象の全主張 |
 | `fact-check` | 特定の主張の事実確認 | 主張ごと |
+| `red-team` | 下書きを壊すことだけを行う | 対象の全主張 |
+| `decision` | 設計判断・方針選択（記事を書かない） | 決定メモ1〜3頁 |
 
 指定がなければ `standard`。`quick` でも絶対規則は同じです。`logic` は全モードに併走します。
+軽い推敲はモードではありません。このスキルを使わず、通常の編集として答えます。
 
 ---
 
@@ -175,11 +179,12 @@ cp -R universal-article-writer .agents/skills/
 
 回答の冒頭に `【チャット出力モード】` と書き、次の順で出します。
 
-1. 記事本文
+1. 記事本文（`decision` では決定メモ）
 2. 出典台帳（表）
 3. 主張と証拠の対応（表）
-4. 監査サマリー（Critical / Major / Minor、判定）
-5. ドシエ（結論、最強の反論、限界、未確認）
+4. 論理監査（結論・前提・推論・反例・反証条件）
+5. 監査サマリー（Critical / Major / Minor、判定）
+6. ドシエ（結論、最強の反論、限界、未確認、価値前提）
 
 ### 引用マーカー
 
@@ -375,7 +380,7 @@ yomiyasu が使える場合は、最終稿に `yomiyasu_lint.py` と `yomiyasu_d
 
 ## 11. 評価
 
-`evals/evals.json` に、22の行動評価ケースと7つのスクリプト回帰テスト（R01–R03、R06–R09）があります。`scripts/check_repo.py` はさらに R04（`--strict`）と R05（入力なし）を検証します。
+`evals/evals.json` に、23の行動評価ケースと7つのスクリプト回帰テスト（R01–R03、R06–R09）があります。`scripts/check_repo.py` はさらに R04（`--strict`）と R05（入力なし）を検証します。
 
 - 短い論考（quick）
 - ユーザーの結論への迎合を拒否
@@ -443,7 +448,7 @@ python scripts/verify_sources.py \
 | 相関を因果と言う | 主張タイプを分類し、G3 で因果チェック |
 | 非有意を「効果なし」と言う | 効果量と信頼区間を確認 |
 | 平均だけを見て分布を無視 | 分布効果・最弱層を確認 |
-| ユーザーの望む結論に合わせる | 絶対規則7、Concession Threshold、赤チーム |
+| ユーザーの望む結論に合わせる | R07、Concession Threshold、赤チーム |
 | 問いの前提を疑わない | フレーム批判を必須化 |
 | 未確認を隠す | `【未確認】` マーカーと `dossier.md` |
 | AI っぽい水増し | AI slop チェックリストと機械監査 |
@@ -481,15 +486,16 @@ universal-article-writer/
 │   ├── gemini.md
 │   ├── coding-agents.md
 │   └── generic-chat.md
-├── references/                  # 13ファイル（4エンジン＋日本語推敲＋専門リファレンス）
+├── references/                  # 14ファイル（4エンジン＋日本語推敲＋意思決定＋専門リファレンス）
 ├── docs/                        # 根拠・設計・比較・評価・スキル調査・FAQ・公開手順
 ├── examples/                    # quick / review / chat-only
-├── assets/                      # 6テンプレート＋バナー＋ソーシャルプレビュー
+├── assets/                      # 7テンプレート＋バナー＋ソーシャルプレビュー
 ├── scripts/
 │   ├── audit_article.py
 │   ├── argument_lint.py
 │   ├── verify_sources.py
 │   ├── build_universal.py       # UNIVERSAL-PROMPT.md の生成
+│   ├── check_consistency.py     # 文書間の規則・フェーズ・役割・件数の検査
 │   └── check_repo.py            # CI用の総合検査
 ├── evals/
 │   ├── evals.json
@@ -545,6 +551,7 @@ python scripts/build_universal.py --check
 
 ## 16. バージョン
 
+- **3.1.0** — 発火範囲を証拠仕事に限定。`decision` モード、`SKILL.md` の圧縮、Phase 3.5 と6役の統一、`check_consistency.py` を追加。
 - **3.0.1** — 日本語推敲層（yomiyasu の7原則）を追加。日本語の表記・比喩・文長・読点を最終推敲に組み込み、README と SKILL の日本語を整理。
 - **3.0.0** — 論理・統合・規範・分業の4エンジン、日本語推敲層、7つの確認項目、3監査、22評価ケース。
 - **2.0.0** — ユニバーサル版。特定のAI・ツールへの依存を外し、チャット出力モード、能力適応、Lite 版、プラットフォーム別アダプターを追加。

@@ -11,8 +11,11 @@
 | `claim-evidence.csv` | Claim–evidence matrix template. |
 | `argument-map.md` | Toulmin argument-map template. |
 | `article-brief.md` | Intake template. |
+| `writing-plan.md` | Reader, promise, structure, voice, and medium plan. |
+| `style-profile.md` | Voice calibration from a writing sample. |
 | `dossier-template.md` | Evidence-dossier template. |
 | `review-scorecard.md` | Red-team scorecard. |
+| `decision-memo.md` | Decision-memo template for `decision` mode. |
 
 ## Regenerating the social preview
 

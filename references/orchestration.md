@@ -73,19 +73,28 @@
 - 禁止：事実から価値を導く。特定の文化・宗教を当然視する。
 - 完了条件：価値前提が明示され、反対立場が公正に扱われている。
 
-### 1.8 Red team（5役）
+### 1.8 Red team（6役）
 
 | 役割 | 問い |
 |---|---|
 | Empiricist | 証拠は主張を支えているか。統計は正しいか。 |
 | Logician | 推論は妥当か。隠れた前提は何か。 |
 | Contrarian | 最も強い反対結論は何か。問いの前提は正しいか。 |
+| Normative analyst | 誰の価値・負担・権利がかかっているか。分配は公正か。 |
 | Practitioner | 実装できるか。副作用・分配・インセンティブは。 |
 | Reader | 見出しとリードの約束を回収しているか。読者の問いに答えているか。 |
 
 - 出力：`review-report.md`（重大度・位置・根拠・修正案）。
 - 禁止：下書きを監査中に書き換える。弱い反論で済ませる。
 - 完了条件：Critical 0、Major は修正済みか理由付きで保留。
+
+**独立性について（重要）**
+
+6役は「6つの独立した検査」ではない。同じモデルが同じ資料を読んで順番に役割を演じる場合、盲点は共有される。役割を分ける意味は、**誤りの種類を網羅する**ことであって、検査の独立性を増やすことではない。
+
+- 別セッション・別モデル・別の資料を通した場合だけ「独立レビュー」と呼ぶ。
+- 独立でない場合は `review-report.md` に「同一モデルによる逐次役割」と明記する。
+- 構造として検査できるもの（引用ID、台帳の整合、書誌、桁）は `scripts/` に落とす。意味の正しさは機械では保証できない。
 
 ### 1.9 Editor（編集）
 
@@ -114,11 +123,13 @@ Phase 2  Synthesizer ──→ claims.csv
    ↓
 Phase 2.5 Logician（形式化・反証条件）
    ↓
-Phase 3  Planner + Logician + Normative analyst（論証設計）
+Phase 3  Planner + Logician（論証設計）
+   ↓
+Phase 3.5 Normative analyst（規範監査。normative / policy のみ）
    ↓
 Phase 4  Editor（下書き・推敲）
    ↓
-Phase 5  Red team（5役、独立）──→ Auditor
+Phase 5  Red team（6役。独立でなければその旨を記録）──→ Auditor
    ↓
 Phase 6  Editor（修正）──→ Auditor（再監査）──→ 納品
 ```
@@ -317,6 +328,7 @@ Phase 6  Editor（修正）──→ Auditor（再監査）──→ 納品
 【Extractor】主要な主張と証拠
 【Methodologist】証拠の強さ
 【Logician】論証と反証条件
+【Normative analyst】価値前提と分配（規範的主張がある場合）
 【Contrarian】最強の反論
 【Reader】約束の回収
 【Editor】修正
@@ -324,3 +336,4 @@ Phase 6  Editor（修正）──→ Auditor（再監査）──→ 納品
 ```
 
 役割を混ぜない。特に、**Contrarian と Editor を同時に演じない**。反論を書く前に直すと、都合の良い基準に流れる。
+また、逐次役割は独立した検査ではない。`review-report.md` の冒頭に「同一モデルによる逐次役割」と書き、独立レビューと区別する。

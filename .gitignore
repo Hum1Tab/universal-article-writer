@@ -22,6 +22,12 @@ desktop.ini
 audit-report.local.json
 *.tmp
 *.log
+.check-tmp/
+.mutation-tmp/
+.tmp/
+verification/
+eval-run/
+tier/
 
 # Node (for optional tooling)
 node_modules/

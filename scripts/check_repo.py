@@ -25,9 +25,10 @@ import io
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
-import tempfile
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Set, Tuple
 from urllib.parse import unquote
@@ -35,7 +36,7 @@ from urllib.parse import unquote
 ROOT = Path(__file__).resolve().parent.parent
 PYTHON = sys.executable
 OLD_ID = "-".join(["logical", "article", "writer"])
-VERSION = "3.0.1"
+VERSION = "3.1.0"
 
 TEXT_SUFFIXES = {
     ".md",
@@ -82,10 +83,14 @@ REQUIRED_FILES = [
     "assets/source-ledger.csv",
     "assets/claim-evidence.csv",
     "assets/dossier-template.md",
+    "assets/decision-memo.md",
     "docs/evidence.md",
     "docs/architecture.md",
     "docs/comparison.md",
     "docs/benchmark.md",
+    "docs/design-notes.md",
+    "docs/verification-2026-10-28.md",
+    "docs/pilot-eval-2026-10-28.md",
     "docs/faq.md",
     "docs/launch.md",
     "docs/guide.ja.md",
@@ -96,7 +101,10 @@ REQUIRED_FILES = [
     "references/normative-and-conceptual.md",
     "references/orchestration.md",
     "references/japanese-editing.md",
+    "references/decision-mode.md",
     "evals/evals.json",
+    "evals/trigger-prompts.json",
+    "evals/trigger-prompts-heldout.json",
     "evals/fixtures/good-article.md",
     "evals/fixtures/good-sources.csv",
     "evals/fixtures/good-claims.csv",
@@ -122,6 +130,9 @@ REQUIRED_FILES = [
     "scripts/argument_lint.py",
     "scripts/verify_sources.py",
     "scripts/build_universal.py",
+    "scripts/check_consistency.py",
+    "scripts/selftest_consistency.py",
+    "scripts/score_trigger.py",
     "scripts/check_repo.py",
 ]
 
@@ -234,6 +245,24 @@ def short_output(proc: subprocess.CompletedProcess, limit: int = 1200) -> str:
     if len(text) > limit:
         text = text[:limit] + "\n... (truncated)"
     return text
+
+
+@contextmanager
+def check_tmpdir():
+    """A writable scratch directory inside the repository.
+
+    ``tempfile.TemporaryDirectory`` creates a directory with an owner-only
+    Windows ACL. Sandboxed runners (and some synced folders) then refuse writes
+    from the child audit process. A plain directory under the repository keeps
+    the inherited ACL and avoids the failure. It is removed afterwards.
+    """
+    path = ROOT / ".check-tmp"
+    shutil.rmtree(path, ignore_errors=True)
+    path.mkdir(parents=True)
+    try:
+        yield path
+    finally:
+        shutil.rmtree(path, ignore_errors=True)
 
 
 # ---------------------------------------------------------------------------
@@ -354,7 +383,25 @@ def check_generated_prompt() -> None:
 
 
 # ---------------------------------------------------------------------------
-# 3. Evals
+# 3. Cross-artifact consistency
+# ---------------------------------------------------------------------------
+
+
+def check_consistency() -> None:
+    print("\n== Cross-artifact consistency ==")
+    script = ROOT / "scripts" / "check_consistency.py"
+    if not script.is_file():
+        R.skip("check_consistency.py is missing")
+        return
+    proc = run_command([PYTHON, str(script)])
+    if proc.returncode == 0:
+        R.ok("cross-artifact consistency checks pass")
+    else:
+        R.fail("cross-artifact consistency checks failed", short_output(proc, 2000))
+
+
+# ---------------------------------------------------------------------------
+# 4. Evals
 # ---------------------------------------------------------------------------
 
 
@@ -385,13 +432,13 @@ def check_evals() -> None:
     if not isinstance(cases, list):
         R.fail("eval cases must be a list")
         return
-    expected_ids = ["E{:02d}".format(i) for i in range(1, 23)]
+    expected_ids = ["E{:02d}".format(i) for i in range(1, 24)]
     actual_ids = [str(case.get("id", "")) for case in cases if isinstance(case, dict)]
     if actual_ids == expected_ids:
-        R.ok("22 behavioral cases, IDs E01-E22")
+        R.ok("23 behavioral cases, IDs E01-E23")
     else:
         R.fail(
-            "behavioral cases must be exactly E01-E22",
+            "behavioral cases must be exactly E01-E23",
             "found: {}".format(", ".join(actual_ids)),
         )
 
@@ -422,7 +469,7 @@ def check_evals() -> None:
     if bad_cases:
         R.fail("some eval cases are incomplete", "\n".join(bad_cases))
     else:
-        R.ok("all 22 cases have prompts, must_do, must_not_do, artifacts, and a pass condition")
+        R.ok("all 23 cases have prompts, must_do, must_not_do, artifacts, and a pass condition")
 
     regressions = data.get("script_regression")
     if not isinstance(regressions, list):
@@ -703,7 +750,7 @@ def check_audit_regressions() -> None:
         R.skip("audit_article.py is missing")
         return
 
-    with tempfile.TemporaryDirectory(prefix="uaw-check-") as tmp:
+    with check_tmpdir() as tmp:
         tmpdir = Path(tmp)
 
         # R01: good fixture -> READY, exit 0
@@ -987,6 +1034,7 @@ def main() -> int:
     check_required_files()
     check_frontmatter()
     check_generated_prompt()
+    check_consistency()
     check_evals()
     check_example_report()
     check_csv_fixtures()

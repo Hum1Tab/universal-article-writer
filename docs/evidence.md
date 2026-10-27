@@ -195,20 +195,21 @@ A model can forget, rationalize, or be persuaded. A file can be diffed. A page
 number can be checked. A claim ID can be traced. This is the “mechanism” the
 project is named after.
 
-### Why seven phases?
+### Why explicit phases?
 
 Flower and Hayes (1981) described writing as a recursive process of planning,
-translating, and reviewing, not a linear pipeline. The seven phases are a
-*contract* that makes each activity observable; they are not a claim that every
-writer must move through them in a fixed order. A `quick` article can compress
-phases, but cannot skip the evidence and review gates.
+translating, and reviewing, not a linear pipeline. The phases are a *contract*
+that makes each activity observable; they are not a claim that every writer must
+move through them in a fixed order. A `quick` article can compress phases, but
+cannot skip the evidence and review gates. Phases 2.5 and 3.5 are conditional
+inference and normative audits, not extra pipeline stages.
 
 ## 3. What the evidence does not show
 
 This is the most important section.
 
 1. **No direct RCT of this protocol.** None of the cited studies tested
-   `UNIVERSAL-PROMPT.md`, its seven phases, or its exact gates. The evidence is
+   `UNIVERSAL-PROMPT.md`, its phases, or its exact gates. The evidence is
    about the failure modes and about adjacent interventions.
 2. **No guaranteed reduction in hallucination.** A source ledger and an audit
    script can catch some structural problems. They cannot prove that a claim is

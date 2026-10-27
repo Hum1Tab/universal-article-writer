@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 audit_article.py — 論理記事工房の機械監査スクリプト
@@ -40,7 +40,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
-VERSION = "3.0.1"
+VERSION = "3.1.0"
 
 ALLOWED_VERIFICATION = {
     "verified",

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 verify_sources.py — 論理記事工房の書誌・出典台帳監査
@@ -44,7 +44,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-VERSION = "3.0.1"
+VERSION = "3.1.0"
 
 SEVERITY_ORDER = {"critical": 0, "major": 1, "minor": 2, "info": 3}
 

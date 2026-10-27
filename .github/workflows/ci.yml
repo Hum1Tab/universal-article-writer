@@ -30,7 +30,7 @@ jobs:
         run: python --version
 
       - name: Compile scripts
-        run: python -m py_compile scripts/audit_article.py scripts/argument_lint.py scripts/verify_sources.py scripts/build_universal.py scripts/check_repo.py
+        run: python -m py_compile scripts/audit_article.py scripts/argument_lint.py scripts/verify_sources.py scripts/build_universal.py scripts/check_consistency.py scripts/selftest_consistency.py scripts/score_trigger.py scripts/check_repo.py
 
       - name: Repository checks
         run: python scripts/check_repo.py

@@ -70,7 +70,7 @@ have adequate evidence and whether counterevidence was sought.
 
 ## What if I cannot run Python?
 
-Use the manual completion checklist in `SKILL.md` §10. State “machine audit not
+Use the manual completion checklist in `SKILL.md` §9. State “machine audit not
 run” in the delivery message. Do not claim a pass you did not run.
 
 ## What if the AI cannot browse the web?

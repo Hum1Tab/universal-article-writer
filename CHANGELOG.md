@@ -4,6 +4,61 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [3.1.0] — 2026-10-28
+
+### Added
+
+- **`decision` mode**: design judgments produce a decision memo (options,
+  criteria, trade-offs, recommendation, exit conditions) instead of an article.
+  New `references/decision-mode.md`, `assets/decision-memo.md`, and eval `E23`.
+- **`scripts/check_consistency.py`**: compares rule IDs, phases, red-team
+  roles, modes, forbidden-pattern IDs, documented case counts, and the
+  `SKILL.md` size claim across artifacts; runs `build_universal.py --check`.
+  Wired into `check_repo.py` and CI.
+- **`docs/design-notes.md`**: the cost model for when the protocol should fire,
+  the correlated-reviewer model of assurance, and the invariant argument behind
+  the consistency checker.
+
+### Changed
+
+- **Description narrowed to evidence-bearing work** (arguments, reviews,
+  fact-checks, normative/policy evaluation, design decisions, logic review).
+  Light copy-editing, brainstorming, and single-source summaries are explicitly
+  out of scope. Rationale: procedure cost should be proportional to error cost.
+- **`SKILL.md` reduced from 701 to under 400 lines.** It keeps the absolute
+  rules (`R01–R15`), modes, phase exit conditions, gates (`G0–G7`), and
+  forbidden patterns (`P01–P28`). Procedure detail now lives only in
+  `references/`, where most of it already existed.
+- **External skill call table moved** from `SKILL.md` §6 to
+  `references/skill-stack.md` §2.1, so it is not loaded on every use.
+- **Phase 3.5 restored in `SKILL.md`** and added to the architecture phase
+  table; the six red-team roles now agree in `SKILL.md`, architecture,
+  orchestration, and the Lite prompt.
+- **Concession Threshold uses observable predicates** instead of a free 1–5
+  judgment, and must be scored in a pass separate from drafting.
+- **Red-team independence stated honestly**: six roles cover different error
+  types; sequential role-play by one model is recorded as non-independent.
+- **Phase 3.5 and G7 expanded** (when applicable) to require abuse risk,
+  resource allocation, and religious/cultural views. Surfaced by the pilot
+  eval of E20, where the normative article passed but covered these thinly.
+
+### Verified
+
+- A small-N verification of the v3.1 changes: trigger scope on two 24-prompt
+  suites (including a held-out suite and a placebo control), a reference-free
+  run, an old/new conformance A/B scored by the deterministic audits, and a
+  six-case mutation test of the consistency checker. Results and limits are in
+  `docs/verification-2026-10-28.md`.
+
+### Fixed
+
+- Duplicate forbidden patterns merged: `P04` (strawman / motte-and-bailey) and
+  `P07` (p-value, relative risk, base rates) no longer restate `P06`.
+- The Chinese README's stale diagram (five roles, five gates, missing 2.5/3.5).
+- `references/skill-stack.md` now truthfully describes the body size and the
+  single-source rule.
+- `UNIVERSAL-PROMPT-LITE.md` carries all 15 rule IDs and the `decision` mode.
+
 ## [3.0.1] — 2026-10-23
 
 ### Added

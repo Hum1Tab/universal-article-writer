@@ -30,6 +30,7 @@ flowchart LR
 | Resist citation theater | Every factual claim needs a source ID or `【未確認】`. |
 | Separate fact, inference, value, and prose | A higher layer cannot override a lower one. |
 | Be auditable | Three deterministic scripts check structure where possible. |
+| Be consistent | Rule, phase, and role identifiers are cross-checked by `scripts/check_consistency.py` in CI, not only by review. |
 | Stay small | Four engines plus a Japanese editing layer, seven gates, six red-team roles; not an org chart. |
 
 ## 2. The state model
@@ -96,6 +97,7 @@ cannot change the lower layer's facts, citations, or uncertainty.
 | 2. Appraise | `claims.csv`, `contradictions.md` | every claim has evidence or `low` confidence; weak evidence is not described as strong |
 | 2.5 Inference | `logic-report.md` | every load-bearing claim has an inference type, warrant, counterexample check, and falsifier |
 | 3. Design | `argument-map.md`, `outline.md` | one-sentence thesis; strongest objection; every section has a job; value premises explicit |
+| 3.5 Normative (conditional) | value-premise note in `dossier.md` | required only for `normative` / `policy` or any normative claim: one-sentence value premise, two frameworks, distribution, worst-off, opposing value, abuse risk / resource allocation / religious and cultural views where relevant, exit condition |
 | 4. Draft | `article-draft.md` | every paragraph has a function; uncertainty is visible |
 | 5. Red team | `review-report.md`, `logic-report.md`, `revision-log.md` | Critical = 0; Major fixed or explicitly acknowledged; G1–G7 pass |
 | 6. Deliver | `article.md`, `dossier.md`, 3 audit JSONs | audits pass, or a named manual fallback |
@@ -117,22 +119,34 @@ a quality gate.
 
 If subagents are unavailable, one model plays all six roles sequentially with
 separate headings. That is weaker than independent reviewers, and the protocol
-says so.
+says so: the six roles are a **coverage** claim about different error types, not
+an **independence** claim about six separate checks. A shared blind spot is not
+removed by re-prompting the same model. See
+[`design-notes.md`](design-notes.md) §2 for the model and its limits.
+
+Structural errors (missing citation IDs, ledger mismatches, bibliography form,
+digit errors) are therefore pushed into the deterministic scripts rather than
+into another role.
 
 ## 5. Concession Threshold
 
-When an objection arrives, rate its strength from 1 to 5:
+When an objection arrives, rate its strength from 1 to 5. The score must be a
+function of **observable predicates**, not of how persuasive the objection
+feels. Score it in a pass separate from drafting, and record which predicate
+was satisfied.
 
-| Score | Meaning | Response |
+| Score | Observable condition | Response |
 |---|---|---|
-| 5 | The thesis collapses | Change the thesis. |
-| 4 | Substantive revision required | Revise the argument and disclose it. |
-| 3 | Clarification required | Clarify, but do not reverse the thesis. |
-| 2 | Minor | Acknowledge or fix locally. |
-| 1 | Misreading | Explain, without conceding. |
+| 5 | Conceding the objection entails the negation of the thesis; no repair is available | Change the thesis. |
+| 4 | The objection falsifies a load-bearing premise, and no evidence in the article restores it | Revise the argument and disclose it. |
+| 3 | A term, scope, or qualifier is ambiguous; the thesis survives clarification | Clarify, but do not reverse the thesis. |
+| 2 | An example, citation format, or emphasis is wrong; thesis and premises are unaffected | Acknowledge or fix locally. |
+| 1 | The objection misreads the text (attributes a claim that was not made) | Explain, without conceding. |
 
 The point is to prevent two failure modes: stubbornness and endless appeasement.
-The score is not a measure of the objector's confidence or status.
+The score is not a measure of the objector's confidence or status. Self-scoring
+by the drafting model remains biased; the rubric reduces arbitrariness, not
+bias.
 
 ## 6. Capability adaptation
 
@@ -164,6 +178,17 @@ SKILL.md ──build_universal.py──> UNIVERSAL-PROMPT.md
 
 `--check` fails if the generated file is stale. CI enforces this so the portable
 prompt cannot silently drift from the skill.
+
+`SKILL.md` is also the canonical source for **identifiers**: rule IDs
+(`R01–R15`), phase numbers, mode names, red-team roles, and forbidden-pattern
+IDs. `scripts/check_consistency.py` parses those identifiers from `SKILL.md`
+and compares them with `docs/architecture.md`, `references/orchestration.md`,
+`UNIVERSAL-PROMPT-LITE.md`, the README files, and `evals/evals.json`. The point
+is not stylistic uniformity: a phase that exists in a diagram but not in the
+protocol is a claim the model cannot follow, and a role count that differs
+between files is a defect that survives review. See
+[`design-notes.md`](design-notes.md) §3 for what the check can and cannot
+guarantee.
 
 ## 8. The three audit scripts
 
@@ -206,11 +231,30 @@ prompt cannot silently drift from the skill.
 None of the three verifies bibliographic existence, semantic support,
 statistical validity, or argument strength. Those remain human work.
 
+### 8.4 `check_consistency.py`
+
+- compares the canonical identifier sets in `SKILL.md` with
+  `docs/architecture.md`, `references/orchestration.md`, and
+  `UNIVERSAL-PROMPT-LITE.md`: phases, roles, modes, rule IDs, and forbidden
+  patterns
+- checks that every reference and asset named in `SKILL.md` exists, and that
+  every file in `references/` is named
+- checks that the documented behavioral-case count matches
+  `evals/evals.json`, that phase 3.5 is not a diagram-only artifact, and that
+  the `SKILL.md` size claim in `references/skill-stack.md` is true
+- runs `build_universal.py --check` so the portable prompt cannot drift
+- exits 0 when every relation holds, 1 otherwise
+
+It checks **relations between artifacts**, not the truth of their content. A
+green run means the documents agree with each other, not that the protocol is
+correct.
+
 Exit codes:
 
 | Code | Meaning |
 |---|---|
-| 0 | READY / PASS / CONDITIONAL / PASS_WITH_NOTES |
+| 0 | READY / PASS / CONDITIONAL / PASS_WITH_NOTES / consistency pass |
+| 1 | consistency failure (a relation between artifacts is broken) |
 | 2 | NOT READY / REVIEW / FAIL (Critical, or Major under `--strict` / `--fail-on`) |
 | 3 | Input error |
 

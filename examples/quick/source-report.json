@@ -1,7 +1,7 @@
 {
   "tool": "verify_sources.py",
-  "version": "3.0.1",
-  "generated_at": "2026-10-22T15:22:52.230742+00:00",
+  "version": "3.1.0",
+  "generated_at": "2026-10-27T16:13:55.722816+00:00",
   "inputs": {
     "sources": "examples/quick/sources.csv",
     "article": "examples/quick/article.md",

@@ -1,0 +1,30 @@
+{
+  "description": "Held-out prompts for comparing skill-description scope. Labels are for scoring only; routers must not see them.",
+  "version": "1.0",
+  "prompts": [
+    {"id": 1, "label": "heavy", "text": "在宅勤務は生産性を上げるか。査読論文を挙げて論じてください。"},
+    {"id": 2, "label": "heavy", "text": "この政策案の費用対効果を、根拠を示して評価してください。"},
+    {"id": 3, "label": "heavy", "text": "2023年の日本の出生数の公式統計を確認して、記事に使える形で示してください。"},
+    {"id": 4, "label": "heavy", "text": "この論文の主張は、引用されているデータで本当に支えられているか監査してください。"},
+    {"id": 5, "label": "heavy", "text": "SNSと若者の抑うつの因果関係を、交絡を整理して論じてください。"},
+    {"id": 6, "label": "heavy", "text": "二つのRCTの結果が矛盾している。どちらを信じるべきか、理由を付けて結論を出してください。"},
+    {"id": 7, "label": "heavy", "text": "「公平」の定義を分析し、反例を挙げてください。"},
+    {"id": 8, "label": "heavy", "text": "この設計案AとBのどちらを採るか、撤退条件付きで決定メモを書いてください。"},
+    {"id": 9, "label": "heavy", "text": "メタ分析の異質性が高い。効果をどう解釈するか、論じてください。"},
+    {"id": 10, "label": "heavy", "text": "この記事の引用が実在するか、DOIを確認してください。"},
+    {"id": 11, "label": "heavy", "text": "AI規制の是非を、倫理理論を2つ使って論じてください。"},
+    {"id": 12, "label": "heavy", "text": "この主張の反論を、相手の最強版で書いてください。"},
+    {"id": 13, "label": "light", "text": "このメールを丁寧な日本語にしてください。"},
+    {"id": 14, "label": "light", "text": "ブログの見出しを5つ提案してください。"},
+    {"id": 15, "label": "light", "text": "この文章を読みやすくしてください。"},
+    {"id": 16, "label": "light", "text": "会議の議事録を箇条書きにまとめてください。"},
+    {"id": 17, "label": "light", "text": "新製品の名前をブレストしてください。"},
+    {"id": 18, "label": "light", "text": "この小説の冒頭を書き直してください。"},
+    {"id": 19, "label": "light", "text": "料理のレシピを短くまとめてください。"},
+    {"id": 20, "label": "light", "text": "このスライドの文言を整えてください。"},
+    {"id": 21, "label": "light", "text": "日記を書くのを手伝ってください。"},
+    {"id": 22, "label": "light", "text": "この一つの記事を200字で要約してください。"},
+    {"id": 23, "label": "light", "text": "キャッチコピーを10個作ってください。"},
+    {"id": 24, "label": "light", "text": "敬語を直してください。"}
+  ]
+}

@@ -35,7 +35,8 @@ audit punished the first and ignored the second.
   `unverified-not-disclosed`.
 - `dossier-good.md` → `READY`; `dossier-bad.md` → `NOT READY`.
 - `logic-report-good.md` → `READY`; `logic-report-bad.md` → `NOT READY`.
-- `check_repo.py` → 75/75.
+- `package-good/` → `READY`; `package-bad/` → `NOT READY`.
+- `check_repo.py` → 77/77.
 - `check_consistency.py` → 36/36.
 - `selftest_consistency.py` → 7/7.
 
@@ -76,7 +77,25 @@ Fix:
 The check verifies structure, not whether the inference is valid or whether the
 falsifier is adequate.
 
-## 6. What this self-audit did not fix
+## 6. Fourth pass — the package itself was not checked
+
+Every artifact had an audit, but no script checked that the artifacts agree with
+each other. A package could have a claim citing `S09` when `sources.csv` stops
+at `S08`, or a load-bearing claim that never appears in `logic-report.md`.
+
+Fix:
+
+- `scripts/audit_package.py` checks required files, claim-evidence IDs,
+  article-citation IDs, load-bearing claims in the logic report, ambiguous
+  article/decision packages, and disclosure of a missing machine audit.
+- `package-good/` / `package-bad/` fixtures, wired into `check_repo.py` as
+  D07/D08.
+
+This approximates phase order only by **artifact presence**. It does not verify
+that the phases ran in order, and it cannot detect a convincing backfilled
+ledger.
+
+## 7. What this self-audit did not fix
 
 - **Phase order is not verified.** The scripts see final artifacts, not whether
   Phase 1–3 were executed. A model can backfill a clean ledger. The protocol

@@ -21,6 +21,10 @@ All notable changes to this project are documented here. The format follows
 - **`scripts/audit_logic_report.py`**: `logic-report.md` is checked for its
   conclusion, premises, inference type, counterexample, falsifiers, and open
   questions, with good/bad fixtures (D05/D06).
+- **`scripts/audit_package.py`**: a delivered package is checked as a whole:
+  required files, claim-evidence and article-citation cross-references,
+  load-bearing claims in the logic report, and disclosure of a missing machine
+  audit (D07/D08).
 - **Trigger-suite checks**: `check_repo.py` validates that both 24-prompt
   suites have 12 heavy / 12 light prompts and contiguous IDs.
 - **CI consistency self-test**: `selftest_consistency.py` now runs in CI, not

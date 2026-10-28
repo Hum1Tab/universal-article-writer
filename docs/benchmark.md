@@ -88,6 +88,8 @@ python scripts/audit_article.py \
 | D04 | `dossier-bad.md` | `NOT READY`, exit 2 |
 | D05 | `logic-report-good.md` | `READY`, exit 0 |
 | D06 | `logic-report-bad.md` | `NOT READY`, exit 2 |
+| D07 | `package-good/` | `READY`, exit 0 |
+| D08 | `package-bad/` | `NOT READY`, exit 2 |
 
 The checked-in `examples/quick/audit-report.json` is a real report generated
 from the example, not a hand-written mock.
@@ -141,6 +143,8 @@ partial `must_do` items and three case-specification issues (E13, E20, E23).
 | `python scripts/audit_dossier.py --dossier evals/fixtures/dossier-bad.md` | `NOT READY`, exit 2 |
 | `python scripts/audit_logic_report.py --report evals/fixtures/logic-report-good.md` | `READY`, exit 0 |
 | `python scripts/audit_logic_report.py --report evals/fixtures/logic-report-bad.md` | `NOT READY`, exit 2 |
+| `python scripts/audit_package.py --dir evals/fixtures/package-good` | `READY`, exit 0 |
+| `python scripts/audit_package.py --dir evals/fixtures/package-bad` | `NOT READY`, exit 2 |
 | unverified claim without a marker | `CONDITIONAL`, flagged |
 | `evals/trigger-prompts*.json` | 24 prompts each, 12/12 |
 | `evals/evals.json` parses and has 23 cases + 7 regressions | pass |

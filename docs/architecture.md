@@ -289,6 +289,17 @@ correct.
 - does not judge whether the inference is valid or whether a falsifier is
   adequate
 
+### 8.8 `audit_package.py`
+
+- checks a delivered package as a whole: required files exist, `article.md` or
+  `decision-memo.md` is present (not both), claim evidence IDs exist in
+  `sources.csv`, article citations exist, load-bearing claims appear in
+  `logic-report.md`, and a missing `audit-report.json` is disclosed as
+  “機械監査は未実行”
+- missing required files and broken cross-references are Critical; an ambiguous
+  mode or an undisclosed machine audit is Major
+- does not verify phase order, semantic support, or article quality
+
 Exit codes:
 
 | Code | Meaning |

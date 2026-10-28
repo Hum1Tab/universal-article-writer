@@ -1,0 +1,2 @@
+claim_id,section,claim,claim_type,evidence_ids,locator,warrant,confidence,counterevidence,status,load_bearing,falsifier
+C01,1,在宅勤務は生産性を高める,descriptive,S02,p.48,単一研究,medium,,supported,yes,効果が再現しない場合

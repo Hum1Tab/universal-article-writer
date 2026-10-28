@@ -1,0 +1,2 @@
+claim_id,section,claim,claim_type,evidence_ids,locator,warrant,confidence,counterevidence,status,load_bearing,falsifier
+C01,1,在宅勤務は知識労働者の主観的生産性を高める可能性がある,descriptive,S01,p.48,無作為化比較試験の自己申告指標,medium,自己申告バイアス,partially-supported,yes,客観指標で効果が再現しない場合

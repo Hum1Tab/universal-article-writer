@@ -126,6 +126,15 @@ REQUIRED_FILES = [
     "evals/fixtures/dossier-bad.md",
     "evals/fixtures/logic-report-good.md",
     "evals/fixtures/logic-report-bad.md",
+    "evals/fixtures/package-good/article.md",
+    "evals/fixtures/package-good/sources.csv",
+    "evals/fixtures/package-good/claims.csv",
+    "evals/fixtures/package-good/dossier.md",
+    "evals/fixtures/package-good/logic-report.md",
+    "evals/fixtures/package-bad/article.md",
+    "evals/fixtures/package-bad/sources.csv",
+    "evals/fixtures/package-bad/claims.csv",
+    "evals/fixtures/package-bad/dossier.md",
     "examples/quick/article.md",
     "examples/quick/sources.csv",
     "examples/quick/claims.csv",
@@ -140,6 +149,7 @@ REQUIRED_FILES = [
     "scripts/audit_decision.py",
     "scripts/audit_dossier.py",
     "scripts/audit_logic_report.py",
+    "scripts/audit_package.py",
     "scripts/argument_lint.py",
     "scripts/verify_sources.py",
     "scripts/build_universal.py",
@@ -912,6 +922,39 @@ def check_logic_report_audit() -> None:
             R.fail("logic-report-bad fixture failed", short_output(proc))
 
 
+def check_package_audit() -> None:
+    print("\n== Package audit ==")
+    script = ROOT / "scripts" / "audit_package.py"
+    if not script.is_file():
+        R.skip("audit_package.py is missing")
+        return
+
+    with check_tmpdir() as tmp:
+        out = tmp / "package-good.json"
+        proc, data = run_tool("audit_package.py", ["--dir", "evals/fixtures/package-good"], out)
+        if proc.returncode == 0 and data:
+            summary = data.get("summary", {})
+            if summary.get("readiness") == "READY" and summary.get("critical") == 0:
+                R.ok("package-good fixture -> READY, exit 0")
+            else:
+                R.fail("package-good fixture must be READY", json.dumps(summary, ensure_ascii=False))
+        else:
+            R.fail("package-good fixture failed", short_output(proc))
+
+        out = tmp / "package-bad.json"
+        proc, data = run_tool("audit_package.py", ["--dir", "evals/fixtures/package-bad"], out)
+        if proc.returncode == 2 and data:
+            summary = data.get("summary", {})
+            checks = {finding.get("check") for finding in data.get("findings", [])}
+            expected = {"missing-artifact", "claim-evidence-missing", "citation-source-missing"}
+            if summary.get("readiness") == "NOT READY" and expected.issubset(checks):
+                R.ok("package-bad fixture -> NOT READY, exit 2, expected checks")
+            else:
+                R.fail("package-bad fixture must be NOT READY with expected checks", json.dumps(summary, ensure_ascii=False))
+        else:
+            R.fail("package-bad fixture failed", short_output(proc))
+
+
 def check_disclosure_test() -> None:
     print("\n== Unverified disclosure ==")
     script = ROOT / "scripts" / "audit_article.py"
@@ -1252,6 +1295,7 @@ def main() -> int:
     check_decision_audit()
     check_dossier_audit()
     check_logic_report_audit()
+    check_package_audit()
     check_disclosure_test()
     check_audit_regressions()
     check_examples()

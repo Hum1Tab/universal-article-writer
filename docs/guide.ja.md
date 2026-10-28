@@ -318,6 +318,18 @@ PowerShell では行末の `\` を `` ` `` に変えてください。
 
 推論の妥当性・反例の強さ・反証条件の十分性は判定しません。
 
+### audit_package.py が検査するもの
+
+成果物ディレクトリ全体を検査します。
+
+- 必須ファイル（`sources.csv`, `claims.csv`, `dossier.md`, `logic-report.md`、記事または決定メモ）
+- 主張の証拠IDが `sources.csv` にあるか
+- 本文の引用IDが `sources.csv` にあるか
+- 荷重主張が `logic-report.md` に出ているか
+- `audit-report.json` がない場合、「機械監査は未実行」と明記されているか
+
+フェーズの実行順序・意味内容・記事の品質は判定しません。
+
 ### 終了コード
 
 | コード | 意味 |
@@ -529,6 +541,7 @@ universal-article-writer/
 │   ├── audit_decision.py        # 決定メモの監査
 │   ├── audit_dossier.py         # ドシエの監査
 │   ├── audit_logic_report.py    # 論理監査メモの監査
+│   ├── audit_package.py         # 成果物一式の相互参照
 │   ├── argument_lint.py
 │   ├── verify_sources.py
 │   ├── build_universal.py       # UNIVERSAL-PROMPT.md の生成

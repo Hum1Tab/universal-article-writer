@@ -146,6 +146,7 @@ partial `must_do` items and three case-specification issues (E13, E20, E23).
 | `python scripts/audit_package.py --dir evals/fixtures/package-good` | `READY`, exit 0 |
 | `python scripts/audit_package.py --dir evals/fixtures/package-bad` | `NOT READY`, exit 2 |
 | unverified claim without a marker | `CONDITIONAL`, flagged |
+| causal claim on partial-only evidence | `CONDITIONAL`, flagged |
 | `evals/trigger-prompts*.json` | 24 prompts each, 12/12 |
 | `evals/evals.json` parses and has 23 cases + 7 regressions | pass |
 | R01 good fixture | `READY`, exit 0 |

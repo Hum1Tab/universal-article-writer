@@ -545,6 +545,32 @@ class Auditor:
                     evidence={"claim_id": display_id(key)},
                 )
 
+            if (
+                load_bearing
+                and claim_type in {"causal", "mechanistic", "predictive"}
+                and evidence_ids
+                and self.sources
+            ):
+                verifications = [
+                    self.sources[sid].get("verification", "").lower()
+                    for sid in evidence_ids
+                    if sid in self.sources
+                ]
+                weak = WEAK_VERIFICATION | {"partial"}
+                if verifications and all(v in weak for v in verifications):
+                    self.add(
+                        "partial-evidence-for-strong-claim",
+                        "major",
+                        "G2",
+                        "荷重主張 {} は {} だが、証拠がすべて partial 以下である。一次資料を確認するか、主張を弱める。".format(
+                            display_id(key), claim_type
+                        ),
+                        evidence={
+                            "claim_id": display_id(key),
+                            "verifications": verifications,
+                        },
+                    )
+
             if claim_type in {"evaluative", "policy"} and not row.get("warrant", "").strip():
                 self.add(
                     "claim-normative-without-warrant",

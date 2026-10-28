@@ -36,7 +36,9 @@ audit punished the first and ignored the second.
 - `dossier-good.md` → `READY`; `dossier-bad.md` → `NOT READY`.
 - `logic-report-good.md` → `READY`; `logic-report-bad.md` → `NOT READY`.
 - `package-good/` → `READY`; `package-bad/` → `NOT READY`.
-- `check_repo.py` → 77/77.
+- `partial-causal-article.md` → `CONDITIONAL`, with
+  `partial-evidence-for-strong-claim`.
+- `check_repo.py` → 78/78.
 - `check_consistency.py` → 36/36.
 - `selftest_consistency.py` → 7/7.
 
@@ -95,7 +97,21 @@ This approximates phase order only by **artifact presence**. It does not verify
 that the phases ran in order, and it cannot detect a convincing backfilled
 ledger.
 
-## 7. What this self-audit did not fix
+## 7. Fifth pass — partial evidence was enough for a causal claim
+
+`partial` sources were Minor everywhere. For a descriptive claim about an
+abstract, that is defensible. For a causal, mechanistic, or predictive claim, an
+abstract-level source cannot carry the claim. The audit treated both the same.
+
+Fix: `audit_article.py` now flags a load-bearing `causal` / `mechanistic` /
+`predictive` claim as Major when **all** of its evidence is `partial` or weaker
+(`partial-evidence-for-strong-claim`). A descriptive claim on a partial source
+stays Minor.
+
+This is a narrow rule, not a blanket “partial is bad”. It is tested by
+`partial-causal-article.md` + `partial-causal-claims.csv`.
+
+## 8. What this self-audit did not fix
 
 - **Phase order is not verified.** The scripts see final artifacts, not whether
   Phase 1–3 were executed. A model can backfill a clean ledger. The protocol

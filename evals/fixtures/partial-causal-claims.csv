@@ -1,0 +1,2 @@
+claim_id,section,claim,claim_type,evidence_ids,locator,warrant,confidence,counterevidence,status,load_bearing,falsifier
+C01,1,在宅勤務は知識労働者の生産性を高める,causal,S01,abstract,抄録の報告を因果主張として使っている,medium,選択効果,partially-supported,yes,客観指標で効果が再現しない場合

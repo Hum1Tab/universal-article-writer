@@ -135,6 +135,8 @@ REQUIRED_FILES = [
     "evals/fixtures/package-bad/sources.csv",
     "evals/fixtures/package-bad/claims.csv",
     "evals/fixtures/package-bad/dossier.md",
+    "evals/fixtures/partial-causal-article.md",
+    "evals/fixtures/partial-causal-claims.csv",
     "examples/quick/article.md",
     "examples/quick/sources.csv",
     "examples/quick/claims.csv",
@@ -955,6 +957,44 @@ def check_package_audit() -> None:
             R.fail("package-bad fixture failed", short_output(proc))
 
 
+def check_partial_evidence_test() -> None:
+    print("\n== Partial evidence for strong claims ==")
+    script = ROOT / "scripts" / "audit_article.py"
+    if not script.is_file():
+        R.skip("audit_article.py is missing")
+        return
+
+    with check_tmpdir() as tmp:
+        out = tmp / "partial-causal.json"
+        proc, data = run_audit(
+            [
+                "--article",
+                "evals/fixtures/partial-causal-article.md",
+                "--sources",
+                "examples/quick/sources.csv",
+                "--claims",
+                "evals/fixtures/partial-causal-claims.csv",
+            ],
+            out,
+        )
+        if proc.returncode == 0 and data:
+            summary = data.get("summary", {})
+            checks = {finding.get("check") for finding in data.get("findings", [])}
+            if (
+                summary.get("readiness") == "CONDITIONAL"
+                and int(summary.get("major", 0)) >= 1
+                and "partial-evidence-for-strong-claim" in checks
+            ):
+                R.ok("partial evidence for a causal claim -> CONDITIONAL, flagged")
+            else:
+                R.fail(
+                    "partial evidence for a strong claim must be flagged",
+                    json.dumps(summary, ensure_ascii=False),
+                )
+        else:
+            R.fail("partial causal fixture failed", short_output(proc))
+
+
 def check_disclosure_test() -> None:
     print("\n== Unverified disclosure ==")
     script = ROOT / "scripts" / "audit_article.py"
@@ -1296,6 +1336,7 @@ def main() -> int:
     check_dossier_audit()
     check_logic_report_audit()
     check_package_audit()
+    check_partial_evidence_test()
     check_disclosure_test()
     check_audit_regressions()
     check_examples()

@@ -198,6 +198,8 @@ guarantee.
 - checks that cited IDs exist in `sources.csv`
 - flags retracted, unverified, and abstract-only sources used as support
 - checks claim-evidence links and load-bearing claims without evidence
+- flags a causal, mechanistic, or predictive load-bearing claim whose evidence is
+  all `partial` or weaker as Major
 - flags normative claims without a warrant, causal claims backed only by
   cross-sectional evidence, and duplicate DOIs
 - flags direct quotations without a locator
